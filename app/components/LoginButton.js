@@ -6,7 +6,6 @@ export default function LoginButton() {
       // 백엔드에서 Google 로그인 URL 받아오기
       const response = await fetch("http://localhost:8080/api/user/auth/google/url?redirect_uri=http://localhost:3000/login/oauth2/google");
       const data = await response.json();
-      console.log(data);
 
       // 받아온 Google 로그인 URL로 이동
       window.location.href = data.data.url;

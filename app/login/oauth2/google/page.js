@@ -6,31 +6,19 @@ export default function GoogleAuthCallback() {
 
   useEffect(() => {
     const fetchToken = async () => {
-      const urlParams = new URLSearchParams(window.location.search);
-      const code = urlParams.get("code");
-      
-      if (!code) {
-        console.error("Google OAuth 인가 코드 없음");
+      const parsedHash = new URLSearchParams(window.location.hash.substring(1));
+      const accessToken = parsedHash.get("access_token");
+
+      if (!accessToken) {
+        console.error("Google OAuth 인가 Token 없음");
         return;
       }
 
-      const body = {
-        "code": code,
-      }
-
-      console.log(body);
-
-      const response = await fetch("http://localhost:8080/api/user/auth/google", {
-        method: "POST",
-        body: JSON.stringify(body),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+      const response = await fetch("http://localhost:8080/api/user/auth/google?access_token=" + accessToken);
 
       console.log(response);
 
-      setCode(code);
+      setCode(accessToken);
     };
 
     fetchToken();
