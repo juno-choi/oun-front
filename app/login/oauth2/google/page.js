@@ -14,7 +14,6 @@ export default function GoogleAuthCallback() {
       }
 
       const response = await (await fetch("http://localhost:8080/api/user/auth/google?access_token=" + googleToken)).json();
-      console.log(response);
 
       const responseData = response.data;
       // 쿠키에 토큰 저장
@@ -33,6 +32,7 @@ export default function GoogleAuthCallback() {
       document.cookie = `access_token=${accessToken}; max-age=${accessTokenMaxAge}; path=/; Secure; SameSite=Lax`;
       document.cookie = `refresh_token=${refreshToken}; max-age=${refreshTokenMaxAge}; path=/; Secure; SameSite=Lax`;
   
+      window.location.href = "/";
     };
 
     fetchToken();
