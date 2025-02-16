@@ -1,6 +1,7 @@
 "use client";
 import { useState, useEffect } from 'react';
 import LoginButton from "./components/LoginButton";
+import LogoutButton from "./components/LogoutButton";
 
 export default function Home() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -21,7 +22,7 @@ export default function Home() {
   return (
     <div style={{ textAlign: "center", marginTop: "50px" }}>
       <h1>OAuth 로그인 테스트</h1>
-      {isLoggedIn ? <p>로그인되었습니다.</p> : <LoginButton />}
+      {isLoggedIn ? <LogoutButton /> : <LoginButton />}
     </div>
   );
 }
