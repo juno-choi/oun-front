@@ -2,23 +2,37 @@
 import { useEffect, useState } from "react";
 
 export default function GoogleAuthCallback() {
-  const [code, setCode] = useState(null);
 
   useEffect(() => {
     const fetchToken = async () => {
       const parsedHash = new URLSearchParams(window.location.hash.substring(1));
-      const accessToken = parsedHash.get("access_token");
+      const googleToken = parsedHash.get("access_token");
 
-      if (!accessToken) {
+      if (!googleToken) {
         console.error("Google OAuth 인가 Token 없음");
         return;
       }
 
-      const response = await fetch("http://localhost:8080/api/user/auth/google?access_token=" + accessToken);
-
+      const response = await (await fetch("http://localhost:8080/api/user/auth/google?access_token=" + googleToken)).json();
       console.log(response);
 
-      setCode(accessToken);
+      const responseData = response.data;
+      // 쿠키에 토큰 저장
+  
+      const accessToken = responseData.accessToken;
+      const refreshToken = responseData.refreshToken;
+      const accessTokenExpiry = responseData.accessTokenExpiredAt;
+      const refreshTokenExpiry = responseData.refreshTokenExpiredAt;
+
+      const currentTime = Date.now();
+      // 밀리초를 초로 변환하고 현재 시간과의 차이를 계산
+      const accessTokenMaxAge = Math.floor(Math.max((accessTokenExpiry - currentTime) / 1000, 0));
+      const refreshTokenMaxAge = Math.floor(Math.max((refreshTokenExpiry - currentTime) / 1000, 0));
+
+      // 쿠키에 토큰 저장
+      document.cookie = `access_token=${accessToken}; max-age=${accessTokenMaxAge}; path=/; Secure; SameSite=Lax`;
+      document.cookie = `refresh_token=${refreshToken}; max-age=${refreshTokenMaxAge}; path=/; Secure; SameSite=Lax`;
+  
     };
 
     fetchToken();
