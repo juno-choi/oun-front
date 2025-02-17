@@ -14,7 +14,6 @@ export default function GoogleAuthCallback() {
       }
 
       const response = await axios.get("/api/user/auth/google?access_token=" + googleToken);
-      console.log(response);
       const responseData = response.data;
       // 쿠키에 토큰 저장
   
