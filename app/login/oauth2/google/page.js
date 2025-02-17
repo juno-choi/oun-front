@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-
+import axios from "@/app/util/axios";
 export default function GoogleAuthCallback() {
 
   useEffect(() => {
@@ -13,8 +13,8 @@ export default function GoogleAuthCallback() {
         return;
       }
 
-      const response = await (await fetch("http://localhost:8080/api/user/auth/google?access_token=" + googleToken)).json();
-
+      const response = await axios.get("/api/user/auth/google?access_token=" + googleToken);
+      console.log(response);
       const responseData = response.data;
       // 쿠키에 토큰 저장
   
