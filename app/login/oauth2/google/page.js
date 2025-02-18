@@ -27,11 +27,6 @@ export default function GoogleAuthCallback() {
       const accessTokenMaxAge = Math.floor(Math.max((accessTokenExpiry - currentTime) / 1000, 0));
       const refreshTokenMaxAge = Math.floor(Math.max((refreshTokenExpiry - currentTime) / 1000, 0));
 
-      console.log(accessToken);
-      console.log(refreshToken);
-      console.log(accessTokenMaxAge);
-      console.log(refreshTokenMaxAge);
-
       // 쿠키에 토큰 저장
       document.cookie = `access_token=${accessToken}; max-age=${accessTokenMaxAge}; path=/; Secure; SameSite=Lax`;
       document.cookie = `refresh_token=${refreshToken}; max-age=${refreshTokenMaxAge}; path=/; Secure; SameSite=Lax`;
