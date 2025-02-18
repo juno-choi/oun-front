@@ -18,7 +18,7 @@ api.interceptors.response.use((response) => {
                 .find(row => row.startsWith('refreshToken'))
                 ?.split('=')[1];
             const response = await api.get(`/auth/refresh/${token}`);
-            const responseData = response.data;
+            const responseData = response.data.data;
             // 쿠키에 토큰 저장
         
             const accessToken = responseData.accessToken;
