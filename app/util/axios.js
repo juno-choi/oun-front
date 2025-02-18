@@ -9,16 +9,18 @@ api.interceptors.response.use((response) => {
 }, async (error) => {
     const originalRequest = error.config;
 
+    console.log(error.response.status);
     if (error.response.status === 401 && !originalRequest._retry) {
         originalRequest._retry = true;
         // access token 재발급
         try {
             const token = document.cookie
                 .split('; ')
-                .find(row => row.startsWith('refreshToken'))
+                .find(row => row.startsWith('refresh_token'))
                 ?.split('=')[1];
-            const response = await api.get(`/auth/refresh/${token}`);
+            const response = await api.get(`/api/user/auth/refresh/${token}`);
             const responseData = response.data.data;
+            console.log(responseData);
             // 쿠키에 토큰 저장
         
             const accessToken = responseData.accessToken;

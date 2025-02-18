@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react';
 import LoginButton from "./components/LoginButton";
 import LogoutButton from "./components/LogoutButton";
+import TestButton from "./components/TestButton";
 
 export default function Home() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -23,6 +24,7 @@ export default function Home() {
     <div style={{ textAlign: "center", marginTop: "50px" }}>
       <h1>OAuth 로그인 테스트</h1>
       {isLoggedIn ? <LogoutButton /> : <LoginButton />}
+      <TestButton />
     </div>
   );
 }
