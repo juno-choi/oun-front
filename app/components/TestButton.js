@@ -4,7 +4,7 @@ import axios from "@/app/util/axios";
 export default function TestButton() {
   const handleTest = async () => {
     console.log("TestButton 클릭");
-    const response = await axios.get("/api/user/auth/unauthorized");
+    const response = await axios.get("/user/auth/unauthorized");
   };
 
   return (

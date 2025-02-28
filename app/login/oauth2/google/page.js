@@ -13,7 +13,7 @@ export default function GoogleAuthCallback() {
         return;
       }
 
-      const response = await axios.get("/api/user/auth/google?access_token=" + googleToken);
+      const response = await axios.get("/user/auth/google?access_token=" + googleToken);
       const responseData = response.data.data;
       // 쿠키에 토큰 저장
   
