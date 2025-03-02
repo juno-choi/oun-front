@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import LoginButton from "./components/LoginButton";
 import LogoutButton from "./components/LogoutButton";
 import TestButton from "./components/TestButton";
+import RoutineButton from "./components/RoutineButton";
 
 export default function Home() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -25,6 +26,7 @@ export default function Home() {
       <h1>OAuth 로그인 테스트</h1>
       {isLoggedIn ? <LogoutButton /> : <LoginButton />}
       <TestButton />
+      <RoutineButton />
     </div>
   );
 }
