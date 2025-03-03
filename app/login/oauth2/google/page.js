@@ -1,7 +1,10 @@
 "use client";
 import { useEffect, useState } from "react";
 import axios from "@/app/util/axios";
+import { useRouter } from 'next/navigation';
+
 export default function GoogleAuthCallback() {
+  const router = useRouter();
 
   useEffect(() => {
     const fetchToken = async () => {
@@ -31,7 +34,7 @@ export default function GoogleAuthCallback() {
       document.cookie = `access_token=${accessToken}; max-age=${accessTokenMaxAge}; path=/; Secure; SameSite=Lax`;
       document.cookie = `refresh_token=${refreshToken}; max-age=${refreshTokenMaxAge}; path=/; Secure; SameSite=Lax`;
   
-      window.location.href = "/";
+      router.push("/start");
     };
 
     fetchToken();
