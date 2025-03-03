@@ -1,5 +1,5 @@
- "use client";
-import { useEffect } from 'react';
+"use client";
+import { useEffect, useState } from 'react';
 import { useAuth } from '@/app/context/AuthContext';
 import { useRouter } from 'next/navigation';
 
@@ -7,15 +7,28 @@ export default function withAuth(WrappedComponent) {
   return function ProtectedRoute(props) {
     const { isLoggedIn, checkAuth } = useAuth();
     const router = useRouter();
+    const [isChecking, setIsChecking] = useState(true);
 
     useEffect(() => {
-      checkAuth();
-      if (!isLoggedIn) {
+      const check = async () => {
+        await checkAuth();
+        setIsChecking(false);
+      };
+      check();
+    }, []);
+
+    useEffect(() => {
+      if (!isChecking && !isLoggedIn) {
         router.push('/');
       }
-    }, [isLoggedIn]);
+    }, [isLoggedIn, isChecking]);
 
-    // 로딩 상태나 비인증 상태일 때 보여줄 컴포넌트나 null 반환
+    // 인증 체크 중일 때는 아무것도 보여주지 않음
+    if (isChecking) {
+      return null;
+    }
+
+    // 로그인되지 않았다면 null 반환
     if (!isLoggedIn) {
       return null;
     }
