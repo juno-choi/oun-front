@@ -19,7 +19,7 @@ export default function RoutineCreateButton({ routineData }) {
                 "Authorization": `Bearer ${accessToken}`
             }
         });
-        const routineId = response.data.data.routineId;
+        const routineId = response.data.data.routine_id;
 
       // 성공 시 health 페이지로 이동
       router.push(`/routine/health/create?routine_id=${routineId}`);
