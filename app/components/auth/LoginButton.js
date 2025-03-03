@@ -12,15 +12,16 @@ export default function LoginButton() {
       window.location.href = data.data.url;
     } catch (error) {
       console.error("Google 로그인 URL 요청 실패:", error);
+      alert("로그인에 실패했습니다. 관리자에게 문의해주세요.");
     }
   };
 
   return (
     <button
-      style={{ padding: "10px 20px", fontSize: "16px", cursor: "pointer" }}
+      className="px-8 py-4 text-lg font-medium text-white bg-black rounded-lg hover:bg-gray-800 transition-colors duration-200 ease-in-out"
       onClick={handleLogin}
     >
-      Google 로그인
+      O.UN Google로 시작하기
     </button>
   );
 }
