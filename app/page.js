@@ -1,9 +1,9 @@
 "use client";
 import { useState, useEffect } from 'react';
-import LoginButton from "./components/LoginButton";
-import LogoutButton from "./components/LogoutButton";
-import TestButton from "./components/TestButton";
-import RoutineButton from "./components/RoutineButton";
+import LoginButton from "./components/auth/LoginButton";
+import LogoutButton from "./components/auth/LogoutButton";
+import TestButton from "./components/test/TestButton";
+import RoutineButton from "./components/routine/RoutineButton";
 
 export default function Home() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
