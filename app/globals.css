@@ -3,8 +3,23 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --white: hsl(210 40% 98%);
+  --black: #121212;
+ 
+  --background: white;
+  --foreground: var(--black);
+ 
+  --primary: 222.2 47.4% 11.2%;
+  --primary-foreground: 210 40% 98%;
+ 
+}
+ 
+.dark {
+  --background: var(--black);
+  --foreground: var(--white);
+ 
+  --primary: 210 40% 98%;
+  --primary-foreground: 222.2 47.4% 11.2%;
 }
 
 @media (prefers-color-scheme: dark) {

@@ -1,6 +1,8 @@
 "use client";
 import { usePathname } from 'next/navigation';
-import BackHistoryButton from '../util/BackHistoryButton';
+import BackHistoryButton from '@/app/components/util/BackHistoryButton';
+import { ThemeProvider } from 'next-themes';
+import ThemeSwitch from '@/app/components/common/ThemeSwitch';
 
 export default function PageLayout({ children }) {
   const pathname = usePathname();
@@ -9,9 +11,12 @@ export default function PageLayout({ children }) {
   const showBackButton = pathname !== '/';
 
   return (
-    <div className="min-h-screen w-full relative">
-      {showBackButton && <BackHistoryButton />}
-      {children}
-    </div>
+    <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+      <div className="min-h-screen w-full relative">
+        <ThemeSwitch />
+        {showBackButton && <BackHistoryButton />}
+        {children}
+      </div>
+    </ThemeProvider>
   );
 } 
