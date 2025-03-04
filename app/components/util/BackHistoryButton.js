@@ -7,7 +7,7 @@ export default function BackHistoryButton() {
   return (
     <button
       onClick={() => router.back()}
-      className="absolute top-8 left-8 p-2 hover:bg-gray-100 rounded-full transition-colors duration-200"
+      className="absolute top-8 left-8 p-2 hover:bg-black rounded-full transition-colors duration-200"
       aria-label="뒤로 가기"
     >
       <svg 

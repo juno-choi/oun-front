@@ -11,12 +11,12 @@ export default function PageLayout({ children }) {
   const showBackButton = pathname !== '/';
 
   return (
-    <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-      <div className="min-h-screen w-full relative">
+    <div className="p-8 bg-white dark:bg-gray-900 shadow-lg dark:shadow-gray-900/30  min-h-screen w-full relative">
+      <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
         <ThemeSwitch />
         {showBackButton && <BackHistoryButton />}
         {children}
-      </div>
-    </ThemeProvider>
+      </ThemeProvider>
+    </div>
   );
 } 
