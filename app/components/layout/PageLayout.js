@@ -11,7 +11,7 @@ export default function PageLayout({ children }) {
   const showBackButton = pathname !== '/';
 
   return (
-    <div className="p-8 bg-white dark:bg-neutral-900 shadow-lg dark:shadow-gray-900/30  min-h-screen w-full relative">
+    <div className="bg-white dark:bg-neutral-900 shadow-lg dark:shadow-neutral-900/30  min-h-screen w-full relative">
       <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
         <ThemeSwitch />
         {showBackButton && <BackHistoryButton />}
