@@ -22,7 +22,7 @@ function RoutineCreatePage() {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen p-4">
       <div className="w-full max-w-md">
-        <h1 className="text-2xl font-bold mb-6 text-center">🏃 새로운 루틴 만들기</h1>
+        <h1 className="text-2xl font-bold mb-6 text-center text-black dark:text-white">🏃 새로운 루틴 만들기</h1>
         
         <form className="space-y-6">
           <InputField
