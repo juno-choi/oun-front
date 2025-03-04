@@ -18,8 +18,9 @@ export function AuthProvider({ children }) {
       };
 
       const accessToken = getCookieValue('access_token');
-      setIsLoggedIn(!!accessToken);
-      return !!accessToken;
+      const refreshToken = getCookieValue('refresh_token');
+      setIsLoggedIn(!!accessToken || !!refreshToken);
+      return !!accessToken || !!refreshToken;
     } catch (error) {
       console.error('Auth check failed:', error);
       setIsLoggedIn(false);

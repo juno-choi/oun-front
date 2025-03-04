@@ -14,11 +14,7 @@ export default function RoutineCreateButton({ routineData }) {
         ?.split('=')[1];
 
         // response로 받은 routine id값 넘겨야함.
-        const response = await axios.post("/api/routine", routineData, {
-            headers: {
-                "Authorization": `Bearer ${accessToken}`
-            }
-        });
+        const response = await axios.post("/api/routine", routineData);
         const routineId = response.data.data.routine_id;
 
       // 성공 시 health 페이지로 이동
