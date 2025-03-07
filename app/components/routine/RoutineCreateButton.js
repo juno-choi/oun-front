@@ -8,17 +8,17 @@ export default function RoutineCreateButton({ routineData }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const accessToken = document.cookie
-        .split('; ')
-        .find(row => row.startsWith('access_token'))
-        ?.split('=')[1];
-
         // response로 받은 routine id값 넘겨야함.
         const response = await axios.post("/api/routine", routineData);
-        const routineId = response.data.data.routine_id;
+        const code = response.data.code;
+        if (code === '0200') {
+            alert('루틴 생성에 성공했습니다~!');
+        } else {
+            alert('루틴 생성에 실패했습니다. 다시 시도해주세요.');
+        }
 
       // 성공 시 health 페이지로 이동
-      router.push(`/routine/health/create?routine_id=${routineId}`);
+      router.push(`/routine`);
     } catch (error) {
       console.error("루틴 생성 실패:", error);
       alert("루틴 생성에 실패했습니다. 다시 시도해주세요.");

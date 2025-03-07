@@ -1,11 +1,14 @@
 "use client";
-import withAuth from '../components/auth/withAuth';
+import withAuth from '@/app/components/auth/withAuth';
+import MainLogo from '@/app/components/main/MainLogo';
+import RoutineList from '@/app/components/routine/RoutineList';
 
 function RoutinePage() {
+
   return (
-    <div className="container mx-auto px-4 py-8">
-      <h1 className="text-2xl font-bold mb-4">루틴 페이지</h1>
-      {/* 페이지 컨텐츠 */}
+    <div className="flex flex-col items-center justify-center min-h-screen gap-6">
+      <MainLogo />
+      <RoutineList />
     </div>
   );
 }
