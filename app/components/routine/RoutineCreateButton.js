@@ -10,9 +10,10 @@ export default function RoutineCreateButton({ routineData }) {
     try {
         // response로 받은 routine id값 넘겨야함.
         const response = await axios.post("/api/routine", routineData);
+        console.log(response);
         const code = response.data.code;
-        if (code === '0200') {
-            alert('루틴 생성에 성공했습니다~!');
+        if (code === '0001') {
+            alert('루틴 생성에 성공했습니다 😀');
         } else {
             alert('루틴 생성에 실패했습니다. 다시 시도해주세요.');
         }
