@@ -1,6 +1,6 @@
 "use client";
 
-import MainImage from "@/app/components/main/MainImage";
+import MainImage from "@/app/components/main/MainLogo";
 import LoginButton from "@/app/components/auth/LoginButton";
 import LogoutButton from "@/app/components/auth/LogoutButton";
 import { useAuth } from '@/app/context/AuthContext';
