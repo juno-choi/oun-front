@@ -43,7 +43,7 @@ export default function RoutineList() {
       <div 
         key={routine.routine_id} 
         className="relative px-10 py-6 text-white bg-black hover:bg-gray-900 rounded-lg transition-colors duration-200 ease-in-out w-80 mb-4 cursor-pointer"
-        onClick={() => router.push(`/routine/detail/${routine.routine_id}`)}
+        onClick={() => router.push(`/routine/detail?routine_id=${routine.routine_id}`)}
       >
           <h2 className="text-2xl font-bold mb-2">
             {routine.name}
