@@ -2,6 +2,7 @@
 import { useSearchParams } from "next/navigation";
 import RoutineDetailSubject from "@/app/components/routine/RoutineDetailSubject";
 import RoutineHealthList from "@/app/components/routine/RoutineHealthList";
+import PulseLine from "@/app/components/common/PulseLine";
 
 export default function RoutineDetailPage() {
     const searchParams = useSearchParams();
@@ -10,6 +11,7 @@ export default function RoutineDetailPage() {
     return (
         <div className="flex flex-col items-center justify-center min-h-screen gap-6">
             <RoutineDetailSubject routineId={routineId} />
+            <PulseLine />
             <RoutineHealthList routineId={routineId} />
         </div>
     );
