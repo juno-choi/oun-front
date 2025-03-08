@@ -4,7 +4,6 @@ import { useRouter } from 'next/navigation';
 export default function BackHistoryButton() {
   const router = useRouter();
 
-
   return (
     // 버튼이 항상 위에 있도록 설정
     <div className="fixed">
