@@ -7,7 +7,8 @@ export default function InputField({
   onChange, 
   placeholder, 
   required = false,
-  type = "text" 
+  type = "text",
+  disabled = false
 }) {
   return (
     <div className="space-y-2">
@@ -21,8 +22,14 @@ export default function InputField({
         value={value}
         onChange={onChange}
         required={required}
-        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent bg-transparent text-black dark:text-white placeholder-gray-400 dark:placeholder-gray-500"
+        className={`w-full px-4 py-2 border border-gray-300 rounded-lg 
+          ${disabled 
+            ? "bg-gray-500 text-white cursor-not-allowed" 
+            : "bg-transparent text-black dark:text-white focus:ring-2 focus:ring-black focus:border-transparent"
+          } 
+          placeholder-gray-400 dark:placeholder-gray-500`}
         placeholder={placeholder}
+        disabled={disabled}
       />
     </div>
   );

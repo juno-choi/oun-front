@@ -4,8 +4,7 @@ import DateDisplay from "@/app/components/util/DateDisplay";
 import LoadingDiv from "@/app/components/common/LoadingDiv";
 import ErrorDiv from "@/app/components/common/ErrorDiv";
 
-export default function RoutineHealthList({routineId}) {
-    const [healthList, setHealthList] = useState([]);
+export default function RoutineHealthList({routineId, healthList, setHealthList}) {
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
 
