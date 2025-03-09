@@ -3,18 +3,14 @@ import axios from "@/app/util/axios";
 export default function RoutineUpdateButton({routine, healthList}) {
     const router = useRouter();
     const handleClick = async () => {
-        console.log(routine);
-        console.log(healthList);
         const requestData = {
             routine_id: routine.routine_id,
             name: routine.name,
             description: routine.description,
-            health_list: healthList,
+            routine_health_list: healthList,
             status: "ACTIVE"
         }
-        console.log(requestData);
         const response = await axios.put(`/api/routine`, requestData);
-        console.log(response);
         if (response.data.code === '0000') {
             router.push(`/routine/detail?routine_id=${routine.routine_id}`);
         } else {
