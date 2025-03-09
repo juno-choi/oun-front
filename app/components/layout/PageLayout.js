@@ -1,6 +1,6 @@
 "use client";
 import { usePathname } from 'next/navigation';
-import BackHistoryButton from '@/app/components/util/BackHistoryButton';
+import BackHistoryButton from '@/app/components/common/BackHistoryButton';
 import { ThemeProvider } from 'next-themes';
 import ThemeSwitch from '@/app/components/common/ThemeSwitch';
 
