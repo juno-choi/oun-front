@@ -1,7 +1,7 @@
 "use client";
 import { useRouter } from 'next/navigation';
 
-export default function RoutineGetButton() {
+export default function RoutineGetButton({ className }) {
     const router = useRouter();
 
     const handleLoadRoutine = () => {
@@ -10,10 +10,10 @@ export default function RoutineGetButton() {
 
     return (
         <button 
-            className="px-8 py-4 text-lg font-medium text-white bg-black rounded-lg hover:bg-gray-800 transition-colors duration-200 ease-in-out w-64"
+            className={className}
             onClick={handleLoadRoutine}
         >
-            루틴 시작하기
+            루틴 목록
         </button>
     )
 }

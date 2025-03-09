@@ -6,7 +6,7 @@ import PulseLine from "@/app/components/common/PulseLine";
 import RoutineUpdateMoveButton from "@/app/components/routine/RoutineUpdateMoveButton";
 import { useState } from "react";
 import withAuth from "@/app/components/auth/withAuth";
-
+import RoutineListMoveButton from "@/app/components/routine/RoutineListMoveButton";
 
 function RoutineDetailPage() {
     const searchParams = useSearchParams();
@@ -18,6 +18,7 @@ function RoutineDetailPage() {
         <div className="flex flex-col items-center justify-center min-h-screen gap-6">
             <RoutineDetailSubject routineId={routineId} routine={routine} setRoutine={setRoutine}/>
             <div className="flex flex-row gap-2">
+                <RoutineListMoveButton className="bg-black text-white hover:bg-gray-600 px-4 py-5 rounded-md" />
                 <RoutineUpdateMoveButton routineId={routineId}/>
             </div>
             <PulseLine />
