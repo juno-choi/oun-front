@@ -4,7 +4,7 @@ import RoutineDetailSubject from "@/app/components/routine/RoutineDetailSubject"
 import RoutineHealthList from "@/app/components/routine/RoutineHealthList";
 import PulseLine from "@/app/components/common/PulseLine";
 import HealthCreateButton from "@/app/components/routine/health/HealthCreateMoveButton";
-import RoutineUpdateButton from "@/app/components/routine/RoutineUpdateButton";
+import RoutineUpdateButton from "@/app/components/routine/RoutineUpdateMoveButton";
 import { useState } from "react";
 import withAuth from "@/app/components/auth/withAuth";
 
@@ -17,7 +17,7 @@ function RoutineDetailPage() {
         <div className="flex flex-col items-center justify-center min-h-screen gap-6">
             <RoutineDetailSubject routineId={routineId} />
             <div className="flex flex-row gap-2">
-                <RoutineUpdateButton />
+                <RoutineUpdateButton routineId={routineId}/>
                 <HealthCreateButton routineId={routineId} healthListSize={healthList.length}/>
             </div>
             <PulseLine />

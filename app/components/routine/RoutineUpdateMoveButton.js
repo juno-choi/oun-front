@@ -1,6 +1,6 @@
 import { useRouter } from "next/navigation";
 
-export default function RoutineUpdateButton({routineId}) {
+export default function RoutineUpdateMoveButton({routineId}) {
     const router = useRouter();
     const handleClick = () => {
         router.push(`/routine/update?routine_id=${routineId}`);
