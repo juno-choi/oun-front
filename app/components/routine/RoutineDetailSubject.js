@@ -4,8 +4,8 @@ import LoadingDiv from "@/app/components/common/LoadingDiv";
 import ErrorDiv from "@/app/components/common/ErrorDiv";
 
 
-export default function RoutineDetailSubject({routineId}) {
-    const [routine, setRoutine] = useState(null);
+export default function RoutineDetailSubject({routineId, routine, setRoutine}) {
+    
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
 
