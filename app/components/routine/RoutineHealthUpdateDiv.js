@@ -11,7 +11,11 @@ export default function RoutineHealthUpdateDiv({routineId, healthList, setHealth
     useEffect(() => {
         const fetchHealthList = async () => {
             const response = await axios.get(`/api/routine/health?routine_id=${routineId}`);
-            setHealthList(response.data.data.health_list);
+            const updatedHealthList = response.data.data.health_list.map(health => ({
+                ...health,
+                id: health.id || `health-${health.sort}`
+            }));
+            setHealthList(updatedHealthList);
         };
         fetchHealthList();
     }, [routineId]);
@@ -28,10 +32,24 @@ export default function RoutineHealthUpdateDiv({routineId, healthList, setHealth
         const [reorderedItem] = items.splice(result.source.index, 1);
         items.splice(result.destination.index, 0, reorderedItem);
 
+        // 각 항목의 sort 값을 인덱스 + 1로 업데이트
+        const updatedItems = items.map((item, index) => ({
+            ...item,
+            sort: index + 1
+        }));
+
         // 상태 업데이트
-        setHealthList(items);
+        setHealthList(updatedItems);
     };
 
+    // 입력 필드 변경 핸들러
+    const handleInputChange = (id, field, value) => {
+        setHealthList(prev => 
+            prev.map(item => 
+                item.id === id ? { ...item, [field]: value } : item
+            )
+        );
+    };
 
     return (
         <div className="w-full">
@@ -41,7 +59,7 @@ export default function RoutineHealthUpdateDiv({routineId, healthList, setHealth
                         <div
                             {...provided.droppableProps}
                             ref={provided.innerRef}
-                            className={`${snapshot.isDraggingOver ? "rounded-lg p-2" : ""}`}
+                            className={`${snapshot.isDraggingOver ? "flex flex-col items-center justify-center" : "flex flex-col items-center justify-center"}`}
                         >
                             {healthList.map((health, index) => (
                                 <Draggable 
@@ -55,33 +73,34 @@ export default function RoutineHealthUpdateDiv({routineId, healthList, setHealth
                                             {...provided.draggableProps}
                                             className={`mb-4 ${snapshot.isDragging ? "opacity-70" : ""}`}
                                         >
+                                            
                                             <div className="p-4 mb-2 relative">
                                                 {/* 드래그 핸들 */}
                                                 <div 
                                                     {...provided.dragHandleProps}
                                                     className="absolute left-2 top-1/2 transform -translate-y-1/2 text-white cursor-move"
                                                 >
-                                                    <div className="text-2xl">📍</div>
+                                                    <span role="img" aria-label="drag handle">📍</span>
                                                 </div>
-                                                
+                                                {/* 드래그 핸들 */}
                                                 <div className="pl-8">
                                                     <InputField
                                                         label="운동 순서"
                                                         name="sort"
-                                                        value={index + 1}
+                                                        value={health.sort || index + 1}
                                                         disabled={true}
                                                     />
                                                     <InputField
                                                         label="운동 이름"
                                                         name="name"
                                                         value={health.name}
-                                                        onChange={(e) => setHealthList(prev => prev.map(h => h.id === health.id ? {...h, name: e.target.value} : h))}
-                                                    />
+                                                        onChange={(e) => handleInputChange(health.id, 'name', e.target.value)}
+                                                    />  
                                                     <TextAreaField
                                                         label="운동 설명"
                                                         name="description"
                                                         value={health.description}
-                                                        onChange={(e) => setHealthList(prev => prev.map(h => h.id === health.id ? {...h, description: e.target.value} : h))}
+                                                        onChange={(e) => handleInputChange(health.id, 'description', e.target.value)}
                                                     />
                                                 </div>
                                             </div>
@@ -95,6 +114,8 @@ export default function RoutineHealthUpdateDiv({routineId, healthList, setHealth
                     )}
                 </Droppable>
             </DragDropContext>
+            
+            {/* 운동 추가 버튼 */}
             <RoutineHealthNewAddButton routineId={routineId} healthList={healthList} setHealthList={setHealthList} />
         </div>
     );
