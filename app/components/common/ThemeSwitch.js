@@ -15,9 +15,9 @@ export default function ThemeSwitch() {
 
   const getThemeText = () => {
     if (theme === 'system') {
-      return '💻';
-    } else if (theme === 'dark') {
       return '🔆';
+    } else if (theme === 'dark') {
+      return '💻';
     } else {
       return '🌙';
     }
