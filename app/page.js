@@ -2,7 +2,7 @@
 
 import MainImage from "@/app/components/main/MainLogo";
 import LoginButton from "@/app/components/auth/LoginButton";
-import LogoutButton from "@/app/components/auth/LogoutButton";
+import LoginUserDiv from "@/app/components/auth/LoginUserDiv";
 import { useAuth } from '@/app/context/AuthContext';
 
 export default function Home() {
@@ -14,7 +14,7 @@ export default function Home() {
         <MainImage />
       </div>
       <div className="mt-8 text-center text-gray-800 dark:text-gray-200">
-        {isLoggedIn ? <LogoutButton /> : <LoginButton />}
+        {isLoggedIn ? <LoginUserDiv /> : <LoginButton />}
       </div>
     </main>
   );

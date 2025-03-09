@@ -22,12 +22,24 @@ export default function LogoutButton() {
     }
   };
 
+  const handleStartPage = () => {
+    router.push("/start");
+  };
+
   return (
-    <button
-      className="px-8 py-4 text-lg font-medium text-white bg-black rounded-lg hover:bg-gray-800 transition-colors duration-200 ease-in-out w-64"
-      onClick={handleLogout}
-    >
-      로그아웃
-    </button>
+    <div className="flex flex-col items-center justify-center gap-4">
+      <button className="px-8 py-4 text-lg font-medium text-white bg-black rounded-lg hover:bg-gray-800 transition-colors duration-200 ease-in-out w-64"
+        onClick={handleStartPage}
+      >
+        시작화면 이동 
+      </button>
+      <button
+        className="px-8 py-4 text-lg font-medium text-white bg-black rounded-lg hover:bg-gray-800 transition-colors duration-200 ease-in-out w-64"
+        onClick={handleLogout}
+      >
+        로그아웃
+      </button>
+    </div>
+    
   );
 }
