@@ -34,7 +34,7 @@ export default function GoogleAuthCallback() {
       document.cookie = `access_token=${accessToken}; max-age=${accessTokenMaxAge}; path=/; Secure; SameSite=Lax`;
       document.cookie = `refresh_token=${refreshToken}; max-age=${refreshTokenMaxAge}; path=/; Secure; SameSite=Lax`;
   
-      router.push("/start");
+      window.location.href = "/";
     };
 
     fetchToken();

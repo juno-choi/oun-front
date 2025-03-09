@@ -9,10 +9,10 @@ export default function RoutineCreateMoveButton() {
     }
     return (
         <button 
-            className="px-8 py-4 text-lg font-medium text-white bg-black rounded-lg hover:bg-gray-800 transition-colors duration-200 ease-in-out w-64"
+            className="px-4 py-4 text-lg font-medium text-white bg-black rounded-lg hover:bg-gray-800 transition-colors duration-200 ease-in-out w-64"
             onClick={handleCreateRoutine}
         >
-        루틴 만들기
+        + 루틴 만들기
         </button>
     )
 }
