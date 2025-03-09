@@ -3,6 +3,8 @@ import { useEffect } from "react";
 import InputField from "@/app/components/common/InputField";
 import TextAreaField from "@/app/components/common/TextAreaField";
 import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
+import SideEmptyLine from "@/app/components/common/SideEmptyLine";
+import RoutineHealthNewAddButton from "@/app/components/routine/RoutineHealthNewAddButton";
 
 export default function RoutineHealthUpdateDiv({routineId, healthList, setHealthList}) {
 
@@ -30,67 +32,70 @@ export default function RoutineHealthUpdateDiv({routineId, healthList, setHealth
         setHealthList(items);
     };
 
+
     return (
-        <DragDropContext onDragEnd={onDragEnd}>
-            <Droppable droppableId="health-list">
-                {(provided, snapshot) => (
-                    <div
-                        {...provided.droppableProps}
-                        ref={provided.innerRef}
-                        className={`${snapshot.isDraggingOver ? "rounded-lg p-2" : ""}`}
-                    >
-                        {healthList.map((health, index) => (
-                            <Draggable 
-                                key={health.id || `health-${index}`} 
-                                draggableId={String(health.id || `health-${index}`)} 
-                                index={index}
-                            >
-                                {(provided, snapshot) => (
-                                    <div
-                                        ref={provided.innerRef}
-                                        {...provided.draggableProps}
-                                        className={`mb-4 ${snapshot.isDragging ? "opacity-70" : ""}`}
-                                    >
-                                        <div className="border-2 border-black rounded-md p-4 bg-black mb-2 relative">
-                                            {/* 드래그 핸들 */}
-                                            <div 
-                                                {...provided.dragHandleProps}
-                                                className="absolute left-2 top-1/2 transform -translate-y-1/2 text-white cursor-move"
-                                            >
-                                                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                                                    <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"></path>
-                                                </svg>
+        <div className="w-full">
+            <DragDropContext onDragEnd={onDragEnd}>
+                <Droppable droppableId="health-list">
+                    {(provided, snapshot) => (
+                        <div
+                            {...provided.droppableProps}
+                            ref={provided.innerRef}
+                            className={`${snapshot.isDraggingOver ? "rounded-lg p-2" : ""}`}
+                        >
+                            {healthList.map((health, index) => (
+                                <Draggable 
+                                    key={health.id || `health-${index}`} 
+                                    draggableId={String(health.id || `health-${index}`)} 
+                                    index={index}
+                                >
+                                    {(provided, snapshot) => (
+                                        <div
+                                            ref={provided.innerRef}
+                                            {...provided.draggableProps}
+                                            className={`mb-4 ${snapshot.isDragging ? "opacity-70" : ""}`}
+                                        >
+                                            <div className="p-4 mb-2 relative">
+                                                {/* 드래그 핸들 */}
+                                                <div 
+                                                    {...provided.dragHandleProps}
+                                                    className="absolute left-2 top-1/2 transform -translate-y-1/2 text-white cursor-move"
+                                                >
+                                                    <div className="text-2xl">📍</div>
+                                                </div>
+                                                
+                                                <div className="pl-8">
+                                                    <InputField
+                                                        label="운동 순서"
+                                                        name="sort"
+                                                        value={index + 1}
+                                                        disabled={true}
+                                                    />
+                                                    <InputField
+                                                        label="운동 이름"
+                                                        name="name"
+                                                        value={health.name}
+                                                        onChange={(e) => setHealthList(prev => prev.map(h => h.id === health.id ? {...h, name: e.target.value} : h))}
+                                                    />
+                                                    <TextAreaField
+                                                        label="운동 설명"
+                                                        name="description"
+                                                        value={health.description}
+                                                        onChange={(e) => setHealthList(prev => prev.map(h => h.id === health.id ? {...h, description: e.target.value} : h))}
+                                                    />
+                                                </div>
                                             </div>
-                                            
-                                            <div className="pl-8">
-                                                <InputField
-                                                    label="순서"
-                                                    name="sort"
-                                                    value={index + 1}
-                                                    disabled={true}
-                                                />
-                                                <InputField
-                                                    label="이름"
-                                                    name="name"
-                                                    value={health.name}
-                                                    onChange={(e) => setHealthList(prev => prev.map(h => h.id === health.id ? {...h, name: e.target.value} : h))}
-                                                />
-                                                <TextAreaField
-                                                    label="설명"
-                                                    name="description"
-                                                    value={health.description}
-                                                    onChange={(e) => setHealthList(prev => prev.map(h => h.id === health.id ? {...h, description: e.target.value} : h))}
-                                                />
-                                            </div>
+                                            <SideEmptyLine />
                                         </div>
-                                    </div>
-                                )}
-                            </Draggable>
-                        ))}
-                        {provided.placeholder}
-                    </div>
-                )}
-            </Droppable>
-        </DragDropContext>
+                                    )}
+                                </Draggable>
+                            ))}
+                            {provided.placeholder}
+                        </div>
+                    )}
+                </Droppable>
+            </DragDropContext>
+            <RoutineHealthNewAddButton routineId={routineId} healthList={healthList} setHealthList={setHealthList} />
+        </div>
     );
 }
