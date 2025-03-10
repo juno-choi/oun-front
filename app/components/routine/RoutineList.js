@@ -3,7 +3,7 @@ import { useState, useEffect, useRef } from 'react';
 import axios from '@/app/util/axios';
 import { useRouter } from 'next/navigation';
 import DateDisplay from '@/app/components/util/DateDisplay';
-import RoutineDeleteButton from './RoutineDeleteButton';
+import RoutineDeleteButton from '@/app/components/routine/RoutineDeleteButton';
 // 요일 매핑 객체
 const DAY_MAPPING = {
   MONDAY: { name: "🏃월", order: 1, shortName: "월" },
