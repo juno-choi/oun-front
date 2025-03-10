@@ -1,3 +1,5 @@
+import axios from '@/app/util/axios';
+
 export default function RoutineDeleteButton({ routineId, fetchRoutineList }) {
 
   // 루틴 삭제 함수
@@ -20,7 +22,7 @@ export default function RoutineDeleteButton({ routineId, fetchRoutineList }) {
 
     return (
         <button
-          onClick={(e) => handleDeleteRoutine(e, routine.routine_id)}
+          onClick={(e) => handleDeleteRoutine(e, routineId)}
           aria-label="루틴 삭제"
         >
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
