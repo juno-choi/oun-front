@@ -4,11 +4,12 @@ import withAuth from '@/app/components/auth/withAuth';
 import RoutineCreateButton from '@/app/components/routine/RoutineCreateButton';
 import InputField from '@/app/components/common/InputField';
 import TextAreaField from '@/app/components/common/TextAreaField';
-
+import RoutineSelect from '@/app/components/routine/RoutineSelect';
 function RoutineCreatePage() {
   const [routineData, setRoutineData] = useState({
     name: '',
-    description: ''
+    description: '',
+    days: ''
   });
 
   const handleChange = (e) => {
@@ -18,6 +19,17 @@ function RoutineCreatePage() {
       [name]: value
     }));
   };
+
+  const daysOptions = [
+    { value: 'MONDAY', label: '월' },
+    { value: 'TUESDAY', label: '화' },
+    { value: 'WEDNESDAY', label: '수' },
+    { value: 'THURSDAY', label: '목' },
+    { value: 'FRIDAY', label: '금' },
+    { value: 'SATURDAY', label: '토' },
+    { value: 'SUNDAY', label: '일' }
+  ];
+
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen p-4">
@@ -34,6 +46,14 @@ function RoutineCreatePage() {
             required
           />
 
+          <RoutineSelect  
+            label="루틴 요일"
+            name="days"
+            value={routineData.days}
+            onChange={handleChange}
+            options={daysOptions}
+            required
+          />
           <TextAreaField
             label="루틴 설명"
             name="description"
