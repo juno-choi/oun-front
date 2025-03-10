@@ -12,7 +12,8 @@ function RoutineUpdatePage() {
     const routineId = searchParams.get('routine_id');
     const [routine, setRoutine] = useState({
         name: '',
-        description: ''
+        description: '',
+        days: ''
     });
     const [healthList, setHealthList] = useState([]);
 

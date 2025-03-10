@@ -7,6 +7,7 @@ export default function RoutineUpdateButton({routine, healthList}) {
             routine_id: routine.routine_id,
             name: routine.name,
             description: routine.description,
+            days: routine.days,
             routine_health_list: healthList,
             status: "ACTIVE"
         }
