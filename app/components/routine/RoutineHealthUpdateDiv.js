@@ -5,6 +5,7 @@ import TextAreaField from "@/app/components/common/TextAreaField";
 import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
 import SideEmptyLine from "@/app/components/common/SideEmptyLine";
 import RoutineHealthNewAddButton from "@/app/components/routine/RoutineHealthNewAddButton";
+import RoutineSelect from "./RoutineSelect";
 
 export default function RoutineHealthUpdateDiv({routineId, healthList, setHealthList}) {
 
@@ -51,6 +52,11 @@ export default function RoutineHealthUpdateDiv({routineId, healthList, setHealth
         );
     };
 
+    const healthTypeOptions = [
+        { value: 'WEIGHT', label: '웨이트(맨몸)' },
+        { value: 'CARDIO', label: '유산소' },
+    ];
+
     return (
         <div className="w-full">
             <DragDropContext onDragEnd={onDragEnd}>
@@ -96,6 +102,14 @@ export default function RoutineHealthUpdateDiv({routineId, healthList, setHealth
                                                         value={health.name}
                                                         onChange={(e) => handleInputChange(health.id, 'name', e.target.value)}
                                                     />  
+                                                    <RoutineSelect 
+                                                        label="운동 타입"
+                                                        name="health_type"
+                                                        value={health.health_type}
+                                                        onChange={(e) => handleInputChange(health.id, 'health_type', e.target.value)}
+                                                        options={healthTypeOptions}
+                                                        required
+                                                    />
                                                     <TextAreaField
                                                         label="운동 설명"
                                                         name="description"
