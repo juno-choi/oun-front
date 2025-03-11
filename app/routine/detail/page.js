@@ -7,6 +7,7 @@ import RoutineUpdateMoveButton from "@/app/components/routine/RoutineUpdateMoveB
 import { useState } from "react";
 import withAuth from "@/app/components/auth/withAuth";
 import RoutineListMoveButton from "@/app/components/routine/RoutineListMoveButton";
+import RoutineStartButton from "@/app/components/routine/RoutineStartButton";
 
 function RoutineDetailPage() {
     const searchParams = useSearchParams();
@@ -20,6 +21,7 @@ function RoutineDetailPage() {
             <div className="flex flex-row gap-2">
                 <RoutineListMoveButton className="bg-black text-white hover:bg-gray-600 px-4 py-5 rounded-md" />
                 <RoutineUpdateMoveButton routineId={routineId}/>
+                <RoutineStartButton routineId={routineId} healthList={healthList}/>
             </div>
             <PulseLine />
             <RoutineHealthList routineId={routineId} healthList={healthList} setHealthList={setHealthList}/>

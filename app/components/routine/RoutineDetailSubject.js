@@ -29,8 +29,8 @@ export default function RoutineDetailSubject({routineId, routine, setRoutine}) {
             {error && <ErrorDiv error={error} />}
             {routine && (
                 <div>
-                    <h1 className="text-2xl font-bold">{routine.name}</h1>
-                    <p>{routine.description}</p>
+                    <h1 className="text-black dark:text-white text-2xl font-bold">{routine.name}</h1>
+                    <p className="text-black dark:text-white">{routine.description}</p>
                 </div>
             )}
         </div>
