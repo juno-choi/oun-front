@@ -3,7 +3,7 @@ import withAuth from "@/app/components/auth/withAuth";
 import RoutineUpdateDiv from "@/app/components/routine/RoutineUpdateDiv";
 import { useSearchParams } from "next/navigation";
 import PulseLine from "@/app/components/common/PulseLine";
-import RoutineHealthUpdateDiv from "@/app/components/routine/RoutineHealthUpdateDiv";
+import RoutineHealthUpdateDiv from "@/app/components/routine/health/RoutineHealthUpdateDiv";
 import { useState} from "react";
 import RoutineUpdateButton from "@/app/components/routine/RoutineUpdateButton";
 

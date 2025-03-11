@@ -3,7 +3,7 @@ import axios from "@/app/util/axios";
 import DateDisplay from "@/app/components/util/DateDisplay";
 import LoadingDiv from "@/app/components/common/LoadingDiv";
 import ErrorDiv from "@/app/components/common/ErrorDiv";
-import RoutineHealthDeleteButton from "@/app/components/routine/RoutineHealthDeleteButton";
+import RoutineHealthDeleteButton from "@/app/components/routine/health/RoutineHealthDeleteButton";
 import HealthCheckSpan from "@/app/components/routine/health/HealthCheckSpan";
 
 export default function RoutineHealthList({routineId, healthList, setHealthList}) {

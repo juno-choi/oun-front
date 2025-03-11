@@ -4,8 +4,8 @@ import InputField from "@/app/components/common/InputField";
 import TextAreaField from "@/app/components/common/TextAreaField";
 import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
 import SideEmptyLine from "@/app/components/common/SideEmptyLine";
-import RoutineHealthNewAddButton from "@/app/components/routine/RoutineHealthNewAddButton";
-import RoutineSelect from "./RoutineSelect";
+import RoutineHealthNewAddButton from "@/app/components/routine/health/RoutineHealthNewAddButton";
+import RoutineSelect from "../RoutineSelect";
 
 export default function RoutineHealthUpdateDiv({routineId, healthList, setHealthList}) {
 

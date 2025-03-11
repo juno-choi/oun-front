@@ -1,7 +1,7 @@
 "use client";
 import { useSearchParams } from "next/navigation";
 import RoutineDetailSubject from "@/app/components/routine/RoutineDetailSubject";
-import RoutineHealthList from "@/app/components/routine/RoutineHealthList";
+import RoutineHealthList from "@/app/components/routine/health/RoutineHealthList";
 import PulseLine from "@/app/components/common/PulseLine";
 import RoutineUpdateMoveButton from "@/app/components/routine/RoutineUpdateMoveButton";
 import { useState } from "react";
