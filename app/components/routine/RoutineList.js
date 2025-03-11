@@ -195,28 +195,27 @@ export default function RoutineList() {
       className="relative px-6 py-4 text-white bg-black hover:bg-gray-900 rounded-lg transition-colors duration-200 ease-in-out mb-4 cursor-pointer"
       onClick={() => routineMoveDetail(routine.routine_id)}
     >
-      <h2 className="text-lg font-bold mb-2 pr-8">
+      <h2 className="text-lg font-bold mb-3 pr-10">
         {routine.name}
       </h2>
-      <p className="text-sm mb-4 text-gray-300">{routine.description}</p>
-      <DateDisplay dateTimeString={routine.created_at} className="text-xs text-gray-500" />
+      <p className="text-base mb-5 text-gray-300">{routine.description}</p>
+      <DateDisplay dateTimeString={routine.created_at} className="text-xs text-gray-400" />
       
-      <div className='absolute top-3 right-3 p-1.5 text-gray-400 hover:text-red-500 transition-colors duration-200'>
         {/* 삭제 버튼 */}
         <RoutineDeleteButton routineId={routine.routine_id} fetchRoutineList={fetchRoutineList} />
-      </div>
+      
 
     </div>
   );
   
   return (
-    <div className="w-1/3" ref={sliderRef}>
+    <div className="w-full max-w-2xl mx-auto" ref={sliderRef}>
       {/* 요일 선택 슬라이더 */}
-      <div className="relative mb-6">
+      <div className="relative mb-8">
         <div className="flex justify-between items-center">
           {/* 이전 버튼 */}
           <button 
-            className={`p-2 rounded-full ${currentDayIndex > 0 ? 'text-black hover:bg-gray-200' : 'text-gray-300 cursor-not-allowed'}`}
+            className={`p-3 text-2xl rounded-full ${currentDayIndex > 0 ? 'text-black hover:bg-gray-200' : 'text-gray-300 cursor-not-allowed'}`}
             onClick={goToPreviousDay}
             disabled={currentDayIndex === 0}
           >
@@ -228,14 +227,14 @@ export default function RoutineList() {
             <h2 className="text-2xl font-bold">
               {DAY_MAPPING[selectedDay].name}
             </h2>
-            <div className="text-sm text-gray-500 mt-1">
+            <div className="text-sm text-gray-500 mt-2">
               {currentDayIndex + 1} / {availableDays.length}
             </div>
           </div>
           
           {/* 다음 버튼 */}
           <button 
-            className={`p-2 rounded-full ${currentDayIndex < availableDays.length - 1 ? 'text-black hover:bg-gray-200' : 'text-gray-300 cursor-not-allowed'}`}
+            className={`p-3 text-2xl rounded-full ${currentDayIndex < availableDays.length - 1 ? 'text-black hover:bg-gray-200' : 'text-gray-300 cursor-not-allowed'}`}
             onClick={goToNextDay}
             disabled={currentDayIndex === availableDays.length - 1}
           >
@@ -244,12 +243,12 @@ export default function RoutineList() {
         </div>
         
         {/* 요일 인디케이터 */}
-        <div className="flex justify-center mt-4 space-x-1">
+        <div className="flex justify-center mt-5 space-x-2">
           {availableDays.map((day, index) => (
             <div 
               key={day} 
-              className={`h-2 rounded-full transition-all duration-300 ${
-                index === currentDayIndex ? 'w-4 bg-black' : 'w-2 bg-gray-300'
+              className={`h-3 rounded-full transition-all duration-300 ${
+                index === currentDayIndex ? 'w-6 bg-black' : 'w-3 bg-gray-300'
               }`}
               onClick={() => setCurrentDayIndex(index)}
             ></div>
@@ -258,8 +257,8 @@ export default function RoutineList() {
       </div>
       
       {/* 선택된 요일의 루틴 목록 */}
-      <div className="mt-4 transition-opacity duration-300">
-        <div className="space-y-4">
+      <div className="mt-6 transition-opacity duration-300 px-2">
+        <div className="space-y-6">
           {routinesByDay[selectedDay] && routinesByDay[selectedDay].map(routine => renderRoutineCard(routine))}
         </div>
       </div>

@@ -32,10 +32,18 @@ export default function RoutineHealthList({routineId, healthList, setHealthList}
                     <h1 className="text-2xl font-bold">{health.name}</h1>
                     <p className="text-sm text-gray-500">{health.description}</p>
                     <DateDisplay dateTimeString={health.created_at} className="text-xs text-gray-500" />
-                    <div className='absolute top-3 right-3 p-1.5 text-gray-400 hover:text-red-500 transition-colors duration-200'>
-                        {/* 삭제 버튼 */}
-                        <RoutineHealthDeleteButton routineHealthId={health.health_id} fetchHealthList={fetchHealthList} />
+                    <div className="w-full">
+                        <div className="flex flex-row gap-2">
+                            세트를 추가해 주세요 👉
+                        </div>
+                        <div className="flex flex-row gap-2">
+                            <button className="bg-white text-black px-4 py-2 rounded-lg">세트 수정</button>
+                        </div>    
                     </div>
+                    
+                    {/* 삭제 버튼 */}
+                    <RoutineHealthDeleteButton routineHealthId={health.health_id} fetchHealthList={fetchHealthList} />
+                    
                 </div>
             ))}
         </div>

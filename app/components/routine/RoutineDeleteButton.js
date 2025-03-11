@@ -21,8 +21,9 @@ export default function RoutineDeleteButton({ routineId, fetchRoutineList }) {
   };
 
     return (
+      <div onClick={(e) => handleDeleteRoutine(e, routineId)} className='absolute top-4 right-4 p-2 text-gray-400 hover:text-red-500 transition-colors duration-200'>
         <button
-          onClick={(e) => handleDeleteRoutine(e, routineId)}
+          
           aria-label="루틴 삭제"
         >
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -33,5 +34,7 @@ export default function RoutineDeleteButton({ routineId, fetchRoutineList }) {
             <line x1="14" y1="11" x2="14" y2="17"></line>
           </svg>
         </button>
+      </div>
+
     )
 }
