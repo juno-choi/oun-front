@@ -14,7 +14,7 @@ function RoutineCreatePage() {
   const [routineData, setRoutineData] = useState({
     name: '',
     description: '',
-    days: ''
+    days: day
   });
 
   const handleChange = (e) => {
