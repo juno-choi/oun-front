@@ -4,7 +4,6 @@ import InputField from "@/app/components/common/InputField";
 import TextAreaField from "@/app/components/common/TextAreaField";
 import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
 import SideEmptyLine from "@/app/components/common/SideEmptyLine";
-import RoutineHealthNewAddButton from "@/app/components/routine/health/RoutineHealthNewAddButton";
 import RoutineSelect from "../RoutineSelect";
 
 export default function RoutineHealthUpdateDiv({routineId, healthList, setHealthList}) {
@@ -129,8 +128,6 @@ export default function RoutineHealthUpdateDiv({routineId, healthList, setHealth
                 </Droppable>
             </DragDropContext>
             
-            {/* 운동 추가 버튼 */}
-            <RoutineHealthNewAddButton routineId={routineId} healthList={healthList} setHealthList={setHealthList} />
         </div>
     );
 }

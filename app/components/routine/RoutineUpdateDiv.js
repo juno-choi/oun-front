@@ -33,7 +33,7 @@ export default function RoutineUpdateDiv({routineId, routine, setRoutine}) {
     
     return (
         <div className="w-full max-w-md">
-            <h1 className="text-2xl font-bold mb-6 text-center text-black dark:text-white">🏃 루틴 수정</h1>
+            
             <InputField
                 label="루틴 이름"
                 name="name"

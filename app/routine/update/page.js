@@ -6,6 +6,7 @@ import PulseLine from "@/app/components/common/PulseLine";
 import RoutineHealthUpdateDiv from "@/app/components/routine/health/RoutineHealthUpdateDiv";
 import { useState} from "react";
 import RoutineUpdateButton from "@/app/components/routine/RoutineUpdateButton";
+import RoutineHealthNewAddButton from "@/app/components/routine/health/RoutineHealthNewAddButton";
 
 function RoutineUpdatePage() {
     const searchParams = useSearchParams();
@@ -19,9 +20,12 @@ function RoutineUpdatePage() {
 
     return (
         <div className="flex flex-col items-center justify-center min-h-screen p-4">
-            <RoutineUpdateDiv routineId={routineId} routine={routine} setRoutine={setRoutine} />
+            <h1 className="text-2xl font-bold mb-6 text-center text-black dark:text-white">🏃 루틴 수정</h1>
             <PulseLine />
+            <RoutineUpdateDiv routineId={routineId} routine={routine} setRoutine={setRoutine} />
             <RoutineHealthUpdateDiv routineId={routineId} healthList={healthList} setHealthList={setHealthList} />
+            {/* 운동 추가 버튼 */}
+            <RoutineHealthNewAddButton routineId={routineId} healthList={healthList} setHealthList={setHealthList} />
             <RoutineUpdateButton routine={routine} healthList={healthList}/>
         </div>
     );

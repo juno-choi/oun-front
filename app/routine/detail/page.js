@@ -18,12 +18,12 @@ function RoutineDetailPage() {
     return (
         <div className="flex flex-col items-center justify-center min-h-screen gap-6">
             <RoutineDetailSubject routineId={routineId} routine={routine} setRoutine={setRoutine}/>
+            <PulseLine />
             <div className="flex flex-row gap-2">
                 <RoutineListMoveButton className="bg-black text-white hover:bg-gray-600 px-4 py-5 rounded-md" />
                 <RoutineUpdateMoveButton routineId={routineId}/>
                 <RoutineStartButton routineId={routineId} healthList={healthList}/>
             </div>
-            <PulseLine />
             <RoutineHealthList routineId={routineId} healthList={healthList} setHealthList={setHealthList}/>
             
         </div>
