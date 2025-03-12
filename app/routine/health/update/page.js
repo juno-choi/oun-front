@@ -9,6 +9,7 @@ import axios from "@/app/util/axios";
 import LoadingDiv from "@/app/components/common/LoadingDiv";
 import ErrorDiv from "@/app/components/common/ErrorDiv";
 import HealthAddButton from "@/app/components/routine/health/healthset/HealthAddButton";
+import HealthUpdateButton from "@/app/components/routine/health/HealthUpdateButton";
 
 function HealthUpdatePage() {
     const searchParams = useSearchParams();
@@ -44,6 +45,7 @@ function HealthUpdatePage() {
                     <PulseLine />
                     <HealthSetListDiv health={health} setHealth={setHealth} />
                     <HealthAddButton health={health} setHealth={setHealth} />
+                    <HealthUpdateButton health={health} setHealth={setHealth} />
                 </>
             ) : (
                 <div>헬스 데이터를 찾을 수 없습니다.</div>

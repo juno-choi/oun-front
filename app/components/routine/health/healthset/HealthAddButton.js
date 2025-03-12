@@ -15,8 +15,9 @@ export default function HealthAddButton({health, setHealth}) {
     }
 
     return (
-        <button onClick={addHealthSet}>
-            세트 추가
+        <button onClick={addHealthSet} className="mt-4 w-full py-3 bg-black text-white rounded-lg hover:bg-gray-800 transition-colors duration-200 flex items-center justify-center">
+            + 세트 추가
         </button>
+        
     );
 }

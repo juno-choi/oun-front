@@ -54,12 +54,6 @@ export default function HealthSetListDiv({health, setHealth}) {
                         onChange={(e) => setHealth({...health, health_set_list: health.health_set_list.map((set, i) => i === index ? {...set, description: e.target.value} : set)})}
                         placeholder="설명"
                     />
-                    <InputField 
-                        label="업데이트 시간"
-                        value={healthSet.updated_at}
-                        onChange={(e) => setHealth({...health, health_set_list: health.health_set_list.map((set, i) => i === index ? {...set, set_updated_at: e.target.value} : set)})}
-                        disabled={true}
-                    />
                 </div>
             ))}
         </div>
