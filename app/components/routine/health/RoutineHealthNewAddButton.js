@@ -24,12 +24,9 @@ export default function RoutineHealthNewAddButton({ routineId, healthList, setHe
     return (
         <button
             onClick={handleAddExercise}
-            className="mt-4 w-full py-3 bg-black text-white rounded-lg hover:bg-gray-800 transition-colors duration-200 flex items-center justify-center"
+            className="px-8 py-4 text-lg font-medium text-white bg-black rounded-lg hover:bg-gray-800 transition-colors duration-200 ease-in-out w-64"
         >
-            <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor" className="mr-2">
-                <path fillRule="evenodd" d="M10 3a1 1 0 00-1 1v5H4a1 1 0 100 2h5v5a1 1 0 102 0v-5h5a1 1 0 100-2h-5V4a1 1 0 00-1-1z" clipRule="evenodd" />
-            </svg>
-            운동 추가
+            + 운동 추가
         </button>
     );
 }

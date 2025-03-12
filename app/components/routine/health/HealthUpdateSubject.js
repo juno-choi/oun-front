@@ -14,7 +14,7 @@ export default function HealthUpdateSubject({health, setHealth}) {
         <div className="w-full max-w-md">
             {health && (
                 <div>
-                    <h1 className="text-2xl font-bold mb-6 text-center text-black dark:text-white">🏃 운동 수정</h1>
+                    
                     <InputField
                         label="운동 이름"
                         name="name"

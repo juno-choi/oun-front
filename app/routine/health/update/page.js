@@ -42,8 +42,9 @@ function HealthUpdatePage() {
                 <ErrorDiv error={error} />
             ) : health ? (
                 <>
-                    <HealthUpdateSubject health={health} setHealth={setHealth} />
+                    <h1 className="text-2xl font-bold mb-6 text-center text-black dark:text-white">🏃 운동 수정</h1>
                     <PulseLine />
+                    <HealthUpdateSubject health={health} setHealth={setHealth} />
                     <HealthSetListDiv health={health} setHealth={setHealth} />
                     <HealthAddButton health={health} setHealth={setHealth} />
                     <HealthUpdateButton routine_id={routineId} health={health} setHealth={setHealth} />

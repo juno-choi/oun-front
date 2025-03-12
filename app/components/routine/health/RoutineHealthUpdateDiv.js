@@ -79,22 +79,16 @@ export default function RoutineHealthUpdateDiv({routineId, healthList, setHealth
                                             className={`mb-4 ${snapshot.isDragging ? "opacity-70" : ""}`}
                                         >
                                             
-                                            <div className="p-4 mb-2 relative">
+                                            <div className="p-4 mb-2 border-2 border-gray-300 rounded-lg relative">
                                                 {/* 드래그 핸들 */}
                                                 <div 
                                                     {...provided.dragHandleProps}
                                                     className="absolute left-2 top-1/2 transform -translate-y-1/2 text-white cursor-move"
                                                 >
-                                                    <span role="img" aria-label="drag handle">📍</span>
+                                                    <span role="img" aria-label="drag handle">↕️</span>
                                                 </div>
                                                 {/* 드래그 핸들 */}
                                                 <div className="pl-8">
-                                                    <InputField
-                                                        label="운동 순서"
-                                                        name="sort"
-                                                        value={health.sort || index + 1}
-                                                        disabled={true}
-                                                    />
                                                     <InputField
                                                         label="운동 이름"
                                                         name="name"
@@ -117,7 +111,6 @@ export default function RoutineHealthUpdateDiv({routineId, healthList, setHealth
                                                     />
                                                 </div>
                                             </div>
-                                            <SideEmptyLine />
                                         </div>
                                     )}
                                 </Draggable>
