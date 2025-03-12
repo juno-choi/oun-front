@@ -1,4 +1,7 @@
+import { useRouter } from "next/navigation";
+
 export default function RoutineStartButton({routineId, healthList}) {
+    const router = useRouter();
 
     const checkRoutineValidation = () => {
         if (healthList.length === 0) {
@@ -18,7 +21,7 @@ export default function RoutineStartButton({routineId, healthList}) {
     }
 
     const routineStart = () => {
-        alert('루틴 시작');
+        router.push(`/routine/start?routine_id=${routineId}`);
     }
 
     const handleClick = () => {
