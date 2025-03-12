@@ -5,7 +5,12 @@ import RoutineCreateButton from '@/app/components/routine/RoutineCreateButton';
 import InputField from '@/app/components/common/InputField';
 import TextAreaField from '@/app/components/common/TextAreaField';
 import RoutineSelect from '@/app/components/routine/RoutineSelect';
+import { useRouter, useSearchParams } from 'next/navigation';
+
 function RoutineCreatePage() {
+  const searchParams = useSearchParams();
+  const day = searchParams.get('day') || '';
+
   const [routineData, setRoutineData] = useState({
     name: '',
     description: '',
@@ -49,7 +54,7 @@ function RoutineCreatePage() {
           <RoutineSelect  
             label="루틴 요일"
             name="days"
-            value={routineData.days}
+            value={routineData.days ? routineData.days : day}
             onChange={handleChange}
             options={daysOptions}
             required

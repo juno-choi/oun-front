@@ -25,7 +25,6 @@ const ORDERED_DAYS = [
   "FRIDAY", 
   "SATURDAY", 
   "SUNDAY", 
-  "NONE"
 ];
 
 // 오늘의 요일 가져오기
@@ -84,16 +83,11 @@ export default function RoutineList() {
       });
       
       setRoutinesByDay(groupedRoutines);
-      
-      // 루틴이 있는 요일만 필터링
-      const daysWithRoutines = ORDERED_DAYS.filter(day => 
-        groupedRoutines[day] && groupedRoutines[day].length > 0
-      );
-      setAvailableDays(daysWithRoutines);
+      setAvailableDays(ORDERED_DAYS);
       
       // 오늘 요일이 있으면 해당 인덱스로 설정
       const today = getTodayDay();
-      const todayIndex = daysWithRoutines.indexOf(today);
+      const todayIndex = ORDERED_DAYS.indexOf(today);
       if (todayIndex !== -1) {
         setCurrentDayIndex(todayIndex);
       }
@@ -207,6 +201,18 @@ export default function RoutineList() {
 
     </div>
   );
+
+  // 루틴 카드 렌더링 함수
+  const renderNoRoutineCard = (day) => (
+    <div 
+      onClick={() => router.push(`/routine/create?day=${day}`)}
+      className="relative px-6 py-4 text-white bg-black hover:bg-gray-900 rounded-lg transition-colors duration-200 ease-in-out mb-4 cursor-pointer"
+    >
+      <h2 className="text-lg font-bold mb-3 pr-10">
+        루틴을 만들어 보세요 👆
+      </h2>
+    </div>
+  );
   
   return (
     <div className="w-full max-w-2xl mx-auto" ref={sliderRef}>
@@ -259,7 +265,11 @@ export default function RoutineList() {
       {/* 선택된 요일의 루틴 목록 */}
       <div className="mt-6 transition-opacity duration-300 px-2">
         <div className="space-y-6">
-          {routinesByDay[selectedDay] && routinesByDay[selectedDay].map(routine => renderRoutineCard(routine))}
+          {routinesByDay[selectedDay] && routinesByDay[selectedDay].length > 0 ? (
+            routinesByDay[selectedDay].map(routine => renderRoutineCard(routine))
+          ) : (
+            renderNoRoutineCard(selectedDay)
+          )}
         </div>
       </div>
     </div>
