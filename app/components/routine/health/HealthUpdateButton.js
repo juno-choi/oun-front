@@ -1,13 +1,13 @@
 import axios from "@/app/util/axios";
 import { useRouter } from "next/navigation";
 
-export default function HealthUpdateButton({health, setHealth}) {
+export default function HealthUpdateButton({routine_id, health, setHealth}) {
     const router = useRouter();
     const updateHealth = async () => {
         setHealth({...health});
         try {
             const response = await axios.put(`/api/routine/health`, health);
-            router.push(`/routine/health/detail?health_id=${health.health_id}`);
+            router.push(`/routine/detail?routine_id=${routine_id}`);
         } catch (error) {
             console.error(error);
         }

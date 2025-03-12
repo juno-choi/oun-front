@@ -27,7 +27,7 @@ export default function RoutineHealthList({routineId, healthList, setHealthList}
     }, []);
 
     const handleClick = (healthId) => {
-        router.push(`/routine/health/update?health_id=${healthId}`);
+        router.push(`/routine/health/update?routine_id=${routineId}&health_id=${healthId}`);
     }
 
     return (

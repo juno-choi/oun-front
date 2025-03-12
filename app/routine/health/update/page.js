@@ -14,6 +14,7 @@ import HealthUpdateButton from "@/app/components/routine/health/HealthUpdateButt
 function HealthUpdatePage() {
     const searchParams = useSearchParams();
     const healthId = searchParams.get('health_id');
+    const routineId = searchParams.get('routine_id');
     const [health, setHealth] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -45,7 +46,7 @@ function HealthUpdatePage() {
                     <PulseLine />
                     <HealthSetListDiv health={health} setHealth={setHealth} />
                     <HealthAddButton health={health} setHealth={setHealth} />
-                    <HealthUpdateButton health={health} setHealth={setHealth} />
+                    <HealthUpdateButton routine_id={routineId} health={health} setHealth={setHealth} />
                 </>
             ) : (
                 <div>헬스 데이터를 찾을 수 없습니다.</div>
