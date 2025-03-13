@@ -56,8 +56,17 @@ export default function RoutineHealthUpdateDiv({routineId, healthList, setHealth
         { value: 'CARDIO', label: '유산소' },
     ];
 
+    const handleDeleteHealth = (id) => {
+        const health = healthList.find(health => health.id === id);
+        if (health.health_set_list.length > 0) {
+            alert("삭제할 수 없습니다.");
+            return;
+        }
+        setHealthList(prev => prev.filter(item => item.id !== id));
+    }
+
     return (
-        <div className="w-full">
+        <div className="w-full mt-10">
             <DragDropContext onDragEnd={onDragEnd}>
                 <Droppable droppableId="health-list">
                     {(provided, snapshot) => (
@@ -109,6 +118,12 @@ export default function RoutineHealthUpdateDiv({routineId, healthList, setHealth
                                                         value={health.description}
                                                         onChange={(e) => handleInputChange(health.id, 'description', e.target.value)}
                                                     />
+                                                </div>
+                                                <div 
+                                                    onClick={() => handleDeleteHealth(health.id)}
+                                                    className="absolute right-2 top-4 transform -translate-y-1/2 text-black dark:text-white cursor-pointer hover:text-red-500 dark:hover:text-red-500"
+                                                >
+                                                    <span>X</span>
                                                 </div>
                                             </div>
                                         </div>
