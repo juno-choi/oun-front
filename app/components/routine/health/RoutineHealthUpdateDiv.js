@@ -57,11 +57,6 @@ export default function RoutineHealthUpdateDiv({routineId, healthList, setHealth
     ];
 
     const handleDeleteHealth = (id) => {
-        const health = healthList.find(health => health.id === id);
-        if (health.health_set_list.length > 0) {
-            alert("삭제할 수 없습니다.");
-            return;
-        }
         setHealthList(prev => prev.filter(item => item.id !== id));
     }
 
