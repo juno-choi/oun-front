@@ -14,7 +14,9 @@ export default function RoutineHealthNewAddButton({ routineId, healthList, setHe
             description: "",
             routine_id: routineId,
             sort: healthList.length + 1,
-            status: "ACTIVE"
+            status: "ACTIVE",
+            health_type: "",
+
         };
         
         // 기존 리스트에 새 운동 추가 (불변성 유지)
