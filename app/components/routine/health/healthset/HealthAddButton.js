@@ -7,7 +7,7 @@ export default function HealthAddButton({health, setHealth}) {
         set_speed: 0,
         set_distance: 0,
         description: "",
-        set_updated_at: '',
+        health_type: health.health_type,
     }
 
     const addHealthSet = () => {

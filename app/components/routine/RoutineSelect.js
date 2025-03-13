@@ -22,7 +22,7 @@ export default function RoutineSelect({
                 className={`w-full px-4 py-2 border border-gray-500 rounded-lg 
                 ${disabled 
                     ? "bg-gray-100 text-gray-500 cursor-not-allowed" 
-                    : "bg-white text-black dark:bg-gray-600 dark:text-white focus:ring-2 focus:ring-black focus:border-transparent"
+                    : "bg-white text-black dark:bg-neutral-900 dark:text-white focus:ring-2 focus:ring-black focus:border-transparent"
                 } 
                 placeholder-gray-400 dark:placeholder-gray-500`}
                 disabled={disabled}

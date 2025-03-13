@@ -24,7 +24,7 @@ export default function RoutineUpdateButton({routine, healthList}) {
             className="px-8 py-4 text-lg font-medium text-white bg-gray-800 rounded-lg hover:bg-gray-900 transition-colors duration-200 ease-in-out w-64 mt-2" 
             onClick={handleClick}
         >
-            루틴 수정
+            수정
         </button>
     );
 }

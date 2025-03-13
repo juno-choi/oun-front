@@ -11,6 +11,7 @@ export default function RoutineHealthUpdateDiv({routineId, healthList, setHealth
     useEffect(() => {
         const fetchHealthList = async () => {
             const response = await axios.get(`/api/routine/health?routine_id=${routineId}`);
+            console.log(response.data.data.health_list);
             const updatedHealthList = response.data.data.health_list.map(health => ({
                 ...health,
                 id: health.id || `health-${health.sort}`
@@ -83,7 +84,7 @@ export default function RoutineHealthUpdateDiv({routineId, healthList, setHealth
                                             className={`mb-4 ${snapshot.isDragging ? "opacity-70" : ""}`}
                                         >
                                             
-                                            <div className="p-4 mb-2 border-2 border-gray-300 rounded-lg relative">
+                                            <div className="p-6 mb-2 border-2 border-gray-300 rounded-lg relative">
                                                 {/* 드래그 핸들 */}
                                                 <div 
                                                     {...provided.dragHandleProps}
@@ -106,6 +107,7 @@ export default function RoutineHealthUpdateDiv({routineId, healthList, setHealth
                                                         onChange={(e) => handleInputChange(health.id, 'health_type', e.target.value)}
                                                         options={healthTypeOptions}
                                                         required
+                                                        disabled={health.health_id > 0}
                                                     />
                                                     <TextAreaField
                                                         label="운동 설명"
