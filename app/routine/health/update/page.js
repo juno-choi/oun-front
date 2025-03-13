@@ -50,7 +50,7 @@ function HealthUpdatePage() {
                     <HealthUpdateButton routine_id={routineId} health={health} setHealth={setHealth} />
                 </>
             ) : (
-                <div>헬스 데이터를 찾을 수 없습니다.</div>
+                <div>헬스 데이터를 찾을 수 없습니다. 관리자에게 문의해주세요.</div>
             )}
         </div>
 
