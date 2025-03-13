@@ -10,6 +10,11 @@ export default function HealthUpdateSubject({health, setHealth}) {
         }));
     };
 
+    const healthTypeConvert = {
+        "WEIGHT": "웨이트(맨몸)",
+        "CARDIO": "유산소",
+    }
+
     return (
         <div className="w-full max-w-md">
             {health && (
@@ -22,6 +27,14 @@ export default function HealthUpdateSubject({health, setHealth}) {
                         onChange={handleChange}
                         placeholder="ex) 스쿼트"
                         required
+                    />
+                    <InputField
+                        label="운동 타입"
+                        name="health_type"
+                        value={healthTypeConvert[health.health_type]}
+                        onChange={handleChange}
+                        placeholder="ex) 하체 운동"
+                        disabled={true}
                     />
                     <TextAreaField
                         label="운동 설명"
