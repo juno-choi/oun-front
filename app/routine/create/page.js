@@ -58,6 +58,7 @@ function RoutineCreatePage() {
             onChange={handleChange}
             options={daysOptions}
             required
+            disabled={true}
           />
           <TextAreaField
             label="루틴 설명"

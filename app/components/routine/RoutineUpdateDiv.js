@@ -49,6 +49,7 @@ export default function RoutineUpdateDiv({routineId, routine, setRoutine}) {
                 onChange={handleChange}
                 options={daysOptions}
                 required
+                disabled={true}
             />
             <TextAreaField
                 label="루틴 설명"
