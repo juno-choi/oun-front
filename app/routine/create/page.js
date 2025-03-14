@@ -4,8 +4,7 @@ import withAuth from '@/app/components/auth/withAuth';
 import RoutineCreateButton from '@/app/components/routine/RoutineCreateButton';
 import InputField from '@/app/components/common/InputField';
 import TextAreaField from '@/app/components/common/TextAreaField';
-import RoutineSelect from '@/app/components/routine/RoutineSelect';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
 
 function RoutineCreatePage() {
   const searchParams = useSearchParams();
@@ -25,15 +24,15 @@ function RoutineCreatePage() {
     }));
   };
 
-  const daysOptions = [
-    { value: 'MONDAY', label: '월' },
-    { value: 'TUESDAY', label: '화' },
-    { value: 'WEDNESDAY', label: '수' },
-    { value: 'THURSDAY', label: '목' },
-    { value: 'FRIDAY', label: '금' },
-    { value: 'SATURDAY', label: '토' },
-    { value: 'SUNDAY', label: '일' }
-  ];
+  const daysMap = {
+    MONDAY: '월',
+    TUESDAY: '화',
+    WEDNESDAY: '수',
+    THURSDAY: '목',
+    FRIDAY: '금',
+    SATURDAY: '토',
+    SUNDAY: '일'
+};
 
 
   return (
@@ -51,12 +50,11 @@ function RoutineCreatePage() {
             required
           />
 
-          <RoutineSelect  
+          <InputField  
             label="루틴 요일"
             name="days"
-            value={routineData.days ? routineData.days : day}
+            value={routineData.days ? daysMap[routineData.days] : daysMap[day]}
             onChange={handleChange}
-            options={daysOptions}
             required
             disabled={true}
           />
