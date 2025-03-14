@@ -9,6 +9,7 @@ export default function HealthUpdateButton({routine_id, health, setHealth}) {
             const response = await axios.put(`/api/routine/health`, health);
             router.push(`/routine/detail?routine_id=${routine_id}`);
         } catch (error) {
+            alert(error.response.data.errors[0].detail);
             console.error(error);
         }
     }

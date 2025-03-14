@@ -1,6 +1,6 @@
 import InputField from "@/app/components/common/InputField";
 
-export default function HealthSetCardio({healthSet, setHealth, index}) {
+export default function HealthSetCardio({health, healthSet, setHealth, index}) {
     return (
         <>
             <InputField 
@@ -18,7 +18,7 @@ export default function HealthSetCardio({healthSet, setHealth, index}) {
                 type="number"
             />
             <InputField 
-                label="거리 (km/h)"
+                label="거리 (m)"
                 value={healthSet.set_distance}
                 onChange={(e) => setHealth({...health, health_set_list: health.health_set_list.map((set, i) => i === index ? {...set, set_distance: e.target.value} : set)})}
                 placeholder="10"

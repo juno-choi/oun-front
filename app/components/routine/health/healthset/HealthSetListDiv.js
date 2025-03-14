@@ -16,11 +16,11 @@ export default function HealthSetListDiv({health, setHealth}) {
                         disabled={true}
                     />
                     {health.health_type === 'WEIGHT' && (
-                        <HealthSetWeightDiv healthSet={healthSet} setHealth={setHealth} index={index} />
+                        <HealthSetWeightDiv health={health} healthSet={healthSet} setHealth={setHealth} index={index} />
                     )}
 
                     {health.health_type === 'CARDIO' && (
-                        <HealthSetCardio healthSet={healthSet} setHealth={setHealth} index={index} />
+                        <HealthSetCardio health={health} healthSet={healthSet} setHealth={setHealth} index={index} />
                     )}
                     
                     <InputField 

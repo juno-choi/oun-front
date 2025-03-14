@@ -1,6 +1,6 @@
 import InputField from "@/app/components/common/InputField";
 
-export default function HealthSetWeightDiv({healthSet, setHealth, index}) {
+export default function HealthSetWeightDiv({health, healthSet, setHealth, index}) {
     return (
         <>
             <InputField 
