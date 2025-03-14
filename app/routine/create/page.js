@@ -41,6 +41,15 @@ function RoutineCreatePage() {
         <h1 className="text-2xl font-bold mb-6 text-center text-black dark:text-white">🏃 새로운 루틴 만들기</h1>
         
         <form className="space-y-6">
+         <InputField  
+            label="루틴 요일"
+            name="days"
+            value={routineData.days ? daysMap[routineData.days] : daysMap[day]}
+            onChange={handleChange}
+            required
+            disabled={true}
+          />
+
           <InputField
             label="루틴 이름"
             name="name"
@@ -50,14 +59,6 @@ function RoutineCreatePage() {
             required
           />
 
-          <InputField  
-            label="루틴 요일"
-            name="days"
-            value={routineData.days ? daysMap[routineData.days] : daysMap[day]}
-            onChange={handleChange}
-            required
-            disabled={true}
-          />
           <TextAreaField
             label="루틴 설명"
             name="description"

@@ -33,6 +33,14 @@ export default function RoutineUpdateDiv({routineId, routine, setRoutine}) {
     
     return (
         <div className="w-full max-w-md">
+            <InputField
+                label="루틴 요일"
+                name="days"
+                value={daysMap[routine.days]}
+                onChange={handleChange}
+                required
+                disabled={true}
+            />
             
             <InputField
                 label="루틴 이름"
@@ -42,14 +50,7 @@ export default function RoutineUpdateDiv({routineId, routine, setRoutine}) {
                 placeholder="ex) 월요일 루틴"
                 required
             />
-            <InputField
-                label="루틴 요일"
-                name="days"
-                value={daysMap[routine.days]}
-                onChange={handleChange}
-                required
-                disabled={true}
-            />
+
             <TextAreaField
                 label="루틴 설명"
                 name="description"
