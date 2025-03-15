@@ -15,8 +15,7 @@ export default function RoutineHealthNewAddButton({ routineId, healthList, setHe
             routine_id: routineId,
             sort: healthList.length + 1,
             status: "ACTIVE",
-            health_type: "",
-
+            health_type: "WEIGHT", // 기본값 설정
         };
         
         // 기존 리스트에 새 운동 추가 (불변성 유지)
@@ -26,9 +25,13 @@ export default function RoutineHealthNewAddButton({ routineId, healthList, setHe
     return (
         <button
             onClick={handleAddExercise}
-            className="px-8 py-4 text-lg font-medium text-white bg-black rounded-lg hover:bg-gray-800 transition-colors duration-200 ease-in-out w-64"
+            className="group relative px-8 py-4 text-lg font-medium text-white bg-black rounded-lg hover:bg-gray-800 transition-all duration-300 ease-in-out shadow-md hover:shadow-lg transform hover:-translate-y-1 flex items-center justify-center"
         >
-            + 운동 추가
+            <span className="inline-block mr-2 text-xl">+</span>
+            <span>운동 추가</span>
+            <span className="absolute -bottom-6 left-0 right-0 text-sm text-gray-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-center">
+                클릭하여 새 운동 추가
+            </span>
         </button>
     );
 }

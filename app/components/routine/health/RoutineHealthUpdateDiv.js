@@ -1,22 +1,24 @@
 import axios from "@/app/util/axios";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import InputField from "@/app/components/common/InputField";
 import TextAreaField from "@/app/components/common/TextAreaField";
 import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
-import SideEmptyLine from "@/app/components/common/SideEmptyLine";
 import RoutineSelect from "../RoutineSelect";
 
 export default function RoutineHealthUpdateDiv({routineId, healthList, setHealthList}) {
 
     useEffect(() => {
         const fetchHealthList = async () => {
-            const response = await axios.get(`/api/routine/health?routine_id=${routineId}`);
-            console.log(response.data.data.health_list);
-            const updatedHealthList = response.data.data.health_list.map(health => ({
-                ...health,
-                id: health.id || `health-${health.sort}`
-            }));
-            setHealthList(updatedHealthList);
+            try {
+                const response = await axios.get(`/api/routine/health?routine_id=${routineId}`);
+                const updatedHealthList = response.data.data.health_list.map(health => ({
+                    ...health,
+                    id: health.id || `health-${health.sort}`
+                }));
+                setHealthList(updatedHealthList);
+            } catch (error) {
+                console.error("운동 목록 조회 실패:", error);
+            }
         };
         fetchHealthList();
     }, [routineId]);
@@ -57,82 +59,145 @@ export default function RoutineHealthUpdateDiv({routineId, healthList, setHealth
         { value: 'CARDIO', label: '유산소' },
     ];
 
+    // 운동 삭제 핸들러
+    const [deleteConfirm, setDeleteConfirm] = useState(null);
+
     const handleDeleteHealth = (id) => {
         setHealthList(prev => prev.filter(item => item.id !== id));
-    }
+        setDeleteConfirm(null);
+    };
+
+    const showDeleteConfirm = (id) => {
+        setDeleteConfirm(id);
+    };
+
+    const cancelDelete = () => {
+        setDeleteConfirm(null);
+    };
 
     return (
-        <div className="w-full mt-10">
-            <DragDropContext onDragEnd={onDragEnd}>
-                <Droppable droppableId="health-list">
-                    {(provided, snapshot) => (
-                        <div
-                            {...provided.droppableProps}
-                            ref={provided.innerRef}
-                            className={`${snapshot.isDraggingOver ? "flex flex-col items-center justify-center" : "flex flex-col items-center justify-center"}`}
-                        >
-                            {healthList.map((health, index) => (
-                                <Draggable 
-                                    key={health.id || `health-${index}`} 
-                                    draggableId={String(health.id || `health-${index}`)} 
-                                    index={index}
-                                >
-                                    {(provided, snapshot) => (
-                                        <div
-                                            ref={provided.innerRef}
-                                            {...provided.draggableProps}
-                                            className={`mb-4 ${snapshot.isDragging ? "opacity-70" : ""}`}
-                                        >
-                                            
-                                            <div className="p-6 mb-2 border-2 border-gray-300 rounded-lg relative">
-                                                {/* 드래그 핸들 */}
-                                                <div 
-                                                    {...provided.dragHandleProps}
-                                                    className="absolute left-2 top-1/2 transform -translate-y-1/2 text-white cursor-move"
-                                                >
-                                                    <span role="img" aria-label="drag handle">↕️</span>
-                                                </div>
-                                                {/* 드래그 핸들 */}
-                                                <div className="pl-8">
-                                                    <InputField
-                                                        label="운동 이름"
-                                                        name="name"
-                                                        value={health.name}
-                                                        onChange={(e) => handleInputChange(health.id, 'name', e.target.value)}
-                                                    />  
-                                                    <RoutineSelect 
-                                                        label="운동 타입"
-                                                        name="health_type"
-                                                        value={health.health_type}
-                                                        onChange={(e) => handleInputChange(health.id, 'health_type', e.target.value)}
-                                                        options={healthTypeOptions}
-                                                        required
-                                                        disabled={health.health_id > 0}
-                                                    />
-                                                    <TextAreaField
-                                                        label="운동 설명"
-                                                        name="description"
-                                                        value={health.description}
-                                                        onChange={(e) => handleInputChange(health.id, 'description', e.target.value)}
-                                                    />
-                                                </div>
-                                                <div 
-                                                    onClick={() => handleDeleteHealth(health.id)}
-                                                    className="absolute right-2 top-4 transform -translate-y-1/2 text-black dark:text-white cursor-pointer hover:text-red-500 dark:hover:text-red-500"
-                                                >
-                                                    <span>X</span>
+        <div className="w-full">
+            {healthList.length === 0 ? (
+                <div className="flex justify-center items-center h-24 text-gray-500">
+                    운동을 추가해주세요
+                </div>
+            ) : (
+                <DragDropContext onDragEnd={onDragEnd}>
+                    <Droppable droppableId="health-list">
+                        {(provided, snapshot) => (
+                            <div
+                                {...provided.droppableProps}
+                                ref={provided.innerRef}
+                                className={`space-y-4 ${snapshot.isDraggingOver ? "bg-gray-100 dark:bg-gray-700 rounded-lg p-2" : ""}`}
+                            >
+                                {healthList.map((health, index) => (
+                                    <Draggable 
+                                        key={health.id || `health-${index}`} 
+                                        draggableId={String(health.id || `health-${index}`)} 
+                                        index={index}
+                                    >
+                                        {(provided, snapshot) => (
+                                            <div
+                                                ref={provided.innerRef}
+                                                {...provided.draggableProps}
+                                                className={`bg-white dark:bg-gray-800 rounded-lg shadow-sm transition-all duration-300 ${snapshot.isDragging ? "opacity-70 shadow-md" : ""}`}
+                                            >
+                                                <div className="relative p-6 border border-gray-200 dark:border-gray-700 rounded-lg">
+                                                    {/* 드래그 핸들 */}
+                                                    <div 
+                                                        {...provided.dragHandleProps}
+                                                        className="absolute left-3 top-6 text-gray-500 dark:text-gray-400 cursor-move flex items-center justify-center h-full"
+                                                    >
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                                            <line x1="12" y1="5" x2="12" y2="19"></line>
+                                                            <polyline points="19 12 12 19 5 12"></polyline>
+                                                        </svg>
+                                                    </div>
+
+                                                    {/* 운동 내용 */}
+                                                    <div className="pl-10">
+                                                        <div className="flex justify-between items-center mb-4 pb-2 border-b border-gray-200 dark:border-gray-700">
+                                                            <h3 className="text-lg font-semibold text-black dark:text-white">
+                                                                {health.name || `운동 ${index + 1}`}
+                                                            </h3>
+                                                            
+                                                            {/* 삭제 버튼 */}
+                                                            <button 
+                                                                onClick={() => showDeleteConfirm(health.id)}
+                                                                className="text-gray-500 hover:text-red-500 transition-colors duration-200 p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-600"
+                                                                aria-label="운동 삭제"
+                                                            >
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                                                    <path d="M3 6h18"></path>
+                                                                    <path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6"></path>
+                                                                    <path d="M8 6V4a2 2 0 012-2h4a2 2 0 012 2v2"></path>
+                                                                </svg>
+                                                            </button>
+                                                            
+                                                            {/* 삭제 확인 모달 */}
+                                                            {deleteConfirm === health.id && (
+                                                                <div className="absolute right-0 top-12 bg-white dark:bg-gray-800 p-4 rounded-lg shadow-lg z-10 border border-gray-200 dark:border-gray-700 w-64">
+                                                                    <p className="text-sm text-gray-700 dark:text-gray-300 mb-3">
+                                                                        정말 이 운동을 삭제하시겠습니까?
+                                                                    </p>
+                                                                    <div className="flex justify-end space-x-2">
+                                                                        <button 
+                                                                            onClick={cancelDelete}
+                                                                            className="px-3 py-1 text-sm bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors"
+                                                                        >
+                                                                            취소
+                                                                        </button>
+                                                                        <button 
+                                                                            onClick={() => handleDeleteHealth(health.id)}
+                                                                            className="px-3 py-1 text-sm bg-red-500 text-white rounded hover:bg-red-600 transition-colors"
+                                                                        >
+                                                                            삭제
+                                                                        </button>
+                                                                    </div>
+                                                                </div>
+                                                            )}
+                                                        </div>
+                                                        
+                                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                                            <InputField
+                                                                label="운동 이름"
+                                                                name="name"
+                                                                value={health.name || ""}
+                                                                onChange={(e) => handleInputChange(health.id, 'name', e.target.value)}
+                                                                placeholder="ex) 스쿼트"
+                                                                required
+                                                            />  
+                                                            <RoutineSelect 
+                                                                label="운동 타입"
+                                                                name="health_type"
+                                                                value={health.health_type || ""}
+                                                                onChange={(e) => handleInputChange(health.id, 'health_type', e.target.value)}
+                                                                options={healthTypeOptions}
+                                                                required
+                                                                disabled={health.health_id > 0}
+                                                            />
+                                                        </div>
+                                                        <div className="mt-4">
+                                                            <TextAreaField
+                                                                label="운동 설명"
+                                                                name="description"
+                                                                value={health.description || ""}
+                                                                onChange={(e) => handleInputChange(health.id, 'description', e.target.value)}
+                                                                placeholder="ex) 하체 운동"
+                                                            />
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    )}
-                                </Draggable>
-                            ))}
-                            {provided.placeholder}
-                        </div>
-                    )}
-                </Droppable>
-            </DragDropContext>
-            
+                                        )}
+                                    </Draggable>
+                                ))}
+                                {provided.placeholder}
+                            </div>
+                        )}
+                    </Droppable>
+                </DragDropContext>
+            )}
         </div>
     );
 }

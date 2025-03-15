@@ -5,14 +5,6 @@ import { useEffect } from "react";
 
 export default function RoutineUpdateDiv({routineId, routine, setRoutine}) {
 
-    useEffect(() => {
-        const fetchRoutine = async () => {
-            const response = await axios.get(`/api/routine/${routineId}`);
-            setRoutine(response.data.data);
-        };
-        fetchRoutine();
-    }, [routineId]);
-
     const handleChange = (e) => {
         const { name, value } = e.target;
         setRoutine(prev => ({
@@ -31,34 +23,45 @@ export default function RoutineUpdateDiv({routineId, routine, setRoutine}) {
         SUNDAY: '일'
     };
     
+    const getDayValue = () => {
+        if (!routine || !routine.days || !daysMap[routine.days]) {
+            return "";
+        }
+        return daysMap[routine.days];
+    };
+    
     return (
-        <div className="w-full max-w-md">
-            <InputField
-                label="루틴 요일"
-                name="days"
-                value={routine.days ? daysMap[routine.days] : ''}
-                onChange={handleChange}
-                required
-                disabled={true}
-            />
+        <div className="w-full">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <InputField
+                    label="루틴 요일"
+                    name="days"
+                    value={getDayValue()}
+                    onChange={handleChange}
+                    required
+                    disabled={true}
+                />
+                
+                <InputField
+                    label="루틴 이름"
+                    name="name"
+                    value={routine.name || ""}
+                    onChange={handleChange}
+                    placeholder="ex) 월요일 루틴"
+                    required
+                />
+            </div>
             
-            <InputField
-                label="루틴 이름"
-                name="name"
-                value={routine.name}
-                onChange={handleChange}
-                placeholder="ex) 월요일 루틴"
-                required
-            />
-
-            <TextAreaField
-                label="루틴 설명"
-                name="description"
-                value={routine.description}
-                onChange={handleChange}
-                placeholder="ex) 하체 운동 루틴"
-                required
-            />
+            <div className="mt-6">
+                <TextAreaField
+                    label="루틴 설명"
+                    name="description"
+                    value={routine.description || ""}
+                    onChange={handleChange}
+                    placeholder="ex) 하체 운동 루틴"
+                    required
+                />
+            </div>
         </div>
     );
 }
