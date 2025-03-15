@@ -28,7 +28,7 @@ export default function HealthAddButton({health, setHealth}) {
             </button>
             
             {health.health_set_list.length === 0 && (
-                <div className="mt-8 p-4 bg-gray-100 dark:bg-gray-800 rounded-lg text-center max-w-md">
+                <div className="mt-8 p-4 rounded-lg text-center max-w-md">
                     <div className="mt-2 text-2xl animate-bounce">👆</div>
                     <p className="text-gray-600 dark:text-gray-300">
                         위 버튼을 클릭하여 첫 번째 세트를 추가해보세요!

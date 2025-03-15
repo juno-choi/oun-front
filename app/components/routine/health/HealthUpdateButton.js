@@ -15,7 +15,7 @@ export default function HealthUpdateButton({routine_id, health, setHealth}) {
     }
 
     return (
-        <button onClick={updateHealth} className="px-8 py-4 text-lg font-medium text-white bg-gray-800 rounded-lg hover:bg-gray-900 transition-colors duration-200 ease-in-out w-64 mt-2">
+        <button onClick={updateHealth} className="px-8 py-4 text-lg font-medium text-white bg-black rounded-lg hover:bg-gray-800 transition-all duration-300 ease-in-out shadow-md hover:shadow-lg transform hover:-translate-y-1 flex items-center justify-center" >
             수정
         </button>
     );
