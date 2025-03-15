@@ -9,7 +9,7 @@ export default function LeftFixButton() {
     <div className="fixed">
       <button
         onClick={() => router.back()}
-        className="absolute top-4 left-4 px-4 py-2 hover:bg-neutral-300 dark:hover:bg-neutral-600 rounded-lg transition-colors duration-200"
+        className="absolute top-4 left-4 px-4 py-2 bg-black hover:bg-neutral-300 dark:hover:bg-neutral-600 rounded-lg transition-colors duration-200"
         aria-label="뒤로 가기"
       >
         🔙
@@ -17,7 +17,7 @@ export default function LeftFixButton() {
       {/* 홈버튼 추가해 */}
       <button
         onClick={() => router.push('/')}
-        className="absolute top-4 left-16 px-4 py-2 hover:bg-neutral-300 dark:hover:bg-neutral-600 rounded-lg transition-colors duration-200"
+        className="absolute top-4 left-20 px-4 py-2 bg-black hover:bg-neutral-300 dark:hover:bg-neutral-600 rounded-lg transition-colors duration-200"
         aria-label="홈으로 가기"
       >
         🏠

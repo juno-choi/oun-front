@@ -26,7 +26,7 @@ export default function ThemeSwitch() {
   return (
     <button 
       onClick={handleThemeChange}
-      className="fixed top-4 right-4 z-50 px-4 py-2 rounded-lg bg-white dark:bg-black hover:bg-neutral-300 dark:hover:bg-neutral-600 transition-colors duration-200"
+      className="fixed top-4 right-4 z-50 px-4 py-2 rounded-lg bg-black hover:bg-neutral-300 dark:hover:bg-neutral-600 transition-colors duration-200"
     >
       {getThemeText()}
     </button>
