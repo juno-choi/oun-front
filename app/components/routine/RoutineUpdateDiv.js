@@ -36,7 +36,7 @@ export default function RoutineUpdateDiv({routineId, routine, setRoutine}) {
             <InputField
                 label="루틴 요일"
                 name="days"
-                value={daysMap[routine.days]}
+                value={routine.days ? daysMap[routine.days] : ''}
                 onChange={handleChange}
                 required
                 disabled={true}
