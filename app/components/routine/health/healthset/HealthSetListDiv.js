@@ -45,7 +45,7 @@ export default function HealthSetListDiv({health, setHealth}) {
             )}
             
             {health.health_set_list.map((healthSet, index) => (
-                <div className="relative bg-gray-50 dark:bg-gray-700 rounded-lg p-6 shadow-sm mb-4 transition-all duration-300" key={index}>
+                <div className="bg-gray-50 dark:bg-gray-700 rounded-lg p-6 shadow-sm mb-4 transition-all duration-300" key={index}>
                     {/* 세트 헤더 */}
                     <div className="flex justify-between items-center mb-4 pb-3 border-b border-gray-200 dark:border-gray-600">
                         <h3 className="text-lg font-semibold text-black dark:text-white flex items-center">

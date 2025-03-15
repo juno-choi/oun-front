@@ -173,7 +173,6 @@ function RoutineStartPage() {
                 
                 <PulseLine />
                 
-                
                 {/* 타이머 */}
                 <StartTimerDiv timer={timer} setTimer={setTimer} isTimerRunning={isTimerRunning} setIsTimerRunning={setIsTimerRunning} />
 
@@ -183,7 +182,6 @@ function RoutineStartPage() {
                 {/* 현재 운동 정보 */}
                 <StartHealthInfoComponent currentExercise={currentExercise} currentSetIndex={currentSetIndex} completedSets={completedSets} currentExerciseIndex={currentExerciseIndex} />
                
-                
                 {/* 네비게이션 버튼 */}
                 <StartHealthNevigatorComponent completeSet={completeSet} goToPreviousSet={goToPreviousSet} goToNextSet={goToNextSet} completedSets={completedSets} currentExerciseIndex={currentExerciseIndex} currentSetIndex={currentSetIndex} />
                 
