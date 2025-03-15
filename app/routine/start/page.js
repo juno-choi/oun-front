@@ -10,6 +10,7 @@ import withAuth from "@/app/components/auth/withAuth";
 import StartTimerDiv from "@/app/components/routine/start/StartTimerComponent";
 import StartProcessComponent from "@/app/components/routine/start/StartProcessComponent";
 import StartHealthInfoComponent from "@/app/components/routine/start/StartHealthInfoComponent";
+import StartHealthNevigatorComponent from "@/app/components/routine/start/StartHealthNevigatorComponent";
 
 function RoutineStartPage() {
     const router = useRouter();
@@ -77,9 +78,6 @@ function RoutineStartPage() {
         }
     }, [routineId]);
 
-    // 현재 운동 및 세트 정보
-    const currentExercise = healthList[currentExerciseIndex];
-
     // 세트 완료 처리
     const completeSet = () => {
         // 현재 세트를 완료로 표시
@@ -109,6 +107,9 @@ function RoutineStartPage() {
             setIsTimerRunning(false);
         }
     };
+
+    // 현재 운동 및 세트 정보
+    const currentExercise = healthList[currentExerciseIndex];
 
     // 이전 세트로 이동
     const goToPreviousSet = () => {
@@ -190,28 +191,7 @@ function RoutineStartPage() {
                
                 
                 {/* 네비게이션 버튼 */}
-                <div className="flex justify-between items-center mb-8">
-                    <button 
-                        onClick={goToPreviousSet}
-                        className="px-4 py-2 bg-gray-700 text-gray-300 rounded-lg font-medium hover:bg-gray-600 transition-colors flex items-center"
-                    >
-                        👈 이전
-                    </button>
-                    
-                    <button 
-                        onClick={completeSet}
-                        className="px-6 py-3 bg-black text-white rounded-lg font-medium hover:bg-gray-900 transition-colors"
-                    >
-                        {completedSets[currentExerciseIndex]?.[currentSetIndex] ? "완료됨" : "세트 완료"}
-                    </button>
-                    
-                    <button 
-                        onClick={goToNextSet}
-                        className="px-4 py-2 bg-gray-700 text-gray-300 rounded-lg font-medium hover:bg-gray-600 transition-colors flex items-center"
-                    >
-                        다음 👉
-                    </button>
-                </div>
+                <StartHealthNevigatorComponent completeSet={completeSet} goToPreviousSet={goToPreviousSet} goToNextSet={goToNextSet} completedSets={completedSets} currentExerciseIndex={currentExerciseIndex} currentSetIndex={currentSetIndex} />
                 
                 {/* 운동 목록 */}
                 <div className="mt-8">
