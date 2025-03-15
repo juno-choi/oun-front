@@ -8,17 +8,17 @@ import { useSearchParams, useRouter } from "next/navigation";
 import PulseLine from "@/app/components/common/PulseLine";
 import withAuth from "@/app/components/auth/withAuth";
 import StartTimerDiv from "@/app/components/routine/start/StartTimerComponent";
+import StartProcessComponent from "@/app/components/routine/start/StartProcessComponent";
 
 function RoutineStartPage() {
     const router = useRouter();
     const [routine, setRoutine] = useState(null);
-    const [healthList, setHealthList] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
     const [currentExerciseIndex, setCurrentExerciseIndex] = useState(0);
     const [currentSetIndex, setCurrentSetIndex] = useState(0);
     const [completedSets, setCompletedSets] = useState({});
-    
+    const [healthList, setHealthList] = useState([]);
     const searchParams = useSearchParams();
     const routineId = searchParams.get('routine_id');
 
@@ -73,8 +73,6 @@ function RoutineStartPage() {
             fetchRoutineData();
         }
     }, [routineId]);
-
-
 
     // 현재 운동 및 세트 정보
     const currentExercise = healthList[currentExerciseIndex];
@@ -138,27 +136,6 @@ function RoutineStartPage() {
     };
 
 
-    // 운동 진행률 계산
-    const calculateProgress = () => {
-        if (healthList.length === 0) return 0;
-        
-        let totalSets = 0;
-        let completedSetsCount = 0;
-        
-        healthList.forEach((health, healthIndex) => {
-            const sets = health.health_set_list.length;
-            totalSets += sets;
-            
-            for (let i = 0; i < sets; i++) {
-                if (completedSets[healthIndex]?.[i]) {
-                    completedSetsCount++;
-                }
-            }
-        });
-        
-        return totalSets > 0 ? (completedSetsCount / totalSets) * 100 : 0;
-    };
-
     if (isLoading) {
         return <LoadingDiv />;
     }
@@ -204,18 +181,7 @@ function RoutineStartPage() {
                 <StartTimerDiv />
 
                 {/* 진행 상태 */}
-                <div className="mt-6 mb-8">
-                    <div className="flex justify-between items-center mb-2">
-                        <span className="text-sm text-gray-500">진행률</span>
-                        <span className="text-sm font-medium text-white">{Math.round(calculateProgress())}%</span>
-                    </div>
-                    <div className="w-full bg-gray-700 rounded-full h-2.5">
-                        <div 
-                            className="bg-gray-300 h-2.5 rounded-full transition-all duration-300" 
-                            style={{ width: `${calculateProgress()}%` }}
-                        ></div>
-                    </div>
-                </div>
+                <StartProcessComponent healthList={healthList} completedSets={completedSets} />
                 
                 {/* 현재 운동 정보 */}
                 <div className="bg-gray-700 rounded-lg p-6 shadow-sm mb-8">
