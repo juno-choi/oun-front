@@ -1,8 +1,7 @@
 import { useState, useEffect } from "react";
 
-export default function StartTimerDiv() {
-    const [timer, setTimer] = useState(0);
-    const [isTimerRunning, setIsTimerRunning] = useState(false);
+export default function StartTimerComponent({ timer, setTimer, isTimerRunning, setIsTimerRunning }) {
+    
     // 타이머 시작/정지
     const toggleTimer = () => {
         setIsTimerRunning(!isTimerRunning);
