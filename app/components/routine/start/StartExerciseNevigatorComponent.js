@@ -1,4 +1,4 @@
-export default function StartHealthNevigatorComponent({ completeSet, goToPreviousSet, goToNextSet, completedSets, currentExerciseIndex, currentSetIndex }) {
+export default function StartExerciseNevigatorComponent({ completeSet, goToPreviousSet, goToNextSet, completedSets, currentExerciseIndex, currentSetIndex }) {
 
 
     return (

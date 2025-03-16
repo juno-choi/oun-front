@@ -3,13 +3,14 @@ import withAuth from "@/app/components/auth/withAuth";
 import RoutineUpdateDiv from "@/app/components/routine/RoutineUpdateDiv";
 import { useSearchParams } from "next/navigation";
 import PulseLine from "@/app/components/common/PulseLine";
-import RoutineHealthUpdateDiv from "@/app/components/routine/health/RoutineHealthUpdateDiv";
 import { useState, useEffect } from "react";
 import RoutineUpdateButton from "@/app/components/routine/RoutineUpdateButton";
-import RoutineHealthNewAddButton from "@/app/components/routine/health/RoutineHealthNewAddButton";
 import LoadingDiv from "@/app/components/common/LoadingDiv";
 import ErrorDiv from "@/app/components/common/ErrorDiv";
 import axios from "@/app/util/axios";
+import RoutineExerciseUpdateDiv from "@/app/components/routine/exercise/RoutineExerciseUpdateDiv";
+import RoutineExerciseNewAddButton from "@/app/components/routine/exercise/RoutineExerciseNewAddButton";
+
 
 function RoutineUpdatePage() {
     const searchParams = useSearchParams();
@@ -19,7 +20,7 @@ function RoutineUpdatePage() {
         description: '',
         days: ''
     });
-    const [healthList, setHealthList] = useState([]);
+    const [exerciseList, setExerciseList] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
 
@@ -80,7 +81,7 @@ function RoutineUpdatePage() {
                             </div>
                         </div>
                         <div className="bg-gray-50 dark:bg-gray-700 rounded-lg p-6 shadow-sm">
-                            <RoutineUpdateDiv routineId={routineId} routine={routine} setRoutine={setRoutine} />
+                            <RoutineUpdateDiv routine={routine} setRoutine={setRoutine} />
                         </div>
                     </div>
                     
@@ -88,22 +89,22 @@ function RoutineUpdatePage() {
                         <div className="flex items-center justify-between mb-4">
                             <h2 className="text-xl font-semibold text-black dark:text-white">운동 목록</h2>
                             <div className="text-sm text-gray-500">
-                                {healthList.length > 0 ? 
-                                    `총 ${healthList.length}개의 운동` : 
+                                {exerciseList.length > 0 ? 
+                                    `총 ${exerciseList.length}개의 운동` : 
                                     '운동을 추가해주세요'}
                             </div>
                         </div>
                         <div className="bg-gray-50 dark:bg-gray-700 rounded-lg p-6 shadow-sm mb-6">
-                            <RoutineHealthUpdateDiv routineId={routineId} healthList={healthList} setHealthList={setHealthList} />
+                            <RoutineExerciseUpdateDiv routineId={routineId} exerciseList={exerciseList} setExerciseList={setExerciseList} />
                             
                             <div className="flex justify-center mt-6">
-                                <RoutineHealthNewAddButton routineId={routineId} healthList={healthList} setHealthList={setHealthList} />
+                                <RoutineExerciseNewAddButton routineId={routineId} exerciseList={exerciseList} setExerciseList={setExerciseList} />
                             </div>
                         </div>
                     </div>
                     
                     <div className="mt-10 flex justify-center">
-                        <RoutineUpdateButton routine={routine} healthList={healthList}/>
+                        <RoutineUpdateButton routine={routine} exerciseList={exerciseList}/>
                     </div>
                 </div>
             )}

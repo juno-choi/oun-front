@@ -1,11 +1,10 @@
 import InputField from "@/app/components/common/InputField";
-import HealthSetWeightDiv from "@/app/components/routine/health/healthset/HealthSetWeightDiv";
-import HealthSetCardio from "@/app/components/routine/health/healthset/HealthSetCardio";
+import HealthSetWeightDiv from "@/app/components/routine/exercise/ExerciseSetWeightDiv";
+import HealthSetCardio from "@/app/components/routine/exercise/ExerciseSetCardio";
 import { useState } from "react";
 
-export default function HealthSetListDiv({health, setHealth}) {
-    // health가 null이거나 health_set_list가 없는 경우 처리
-    if (!health || !health.health_set_list) {
+export default function ExerciseSetListDiv({exercise, setExercise}) {
+    if (!exercise || !exercise.exercise_set_list) {
         return <div className="w-full max-w-3xl mx-auto mt-10 mb-10 text-center">데이터를 불러오는 중...</div>;
     }
 
@@ -13,16 +12,16 @@ export default function HealthSetListDiv({health, setHealth}) {
 
     // 세트 삭제 함수
     const handleDeleteSet = (index) => {
-        const newHealthSetList = [...health.health_set_list];
-        newHealthSetList.splice(index, 1);
+        const newExerciseSetList = [...exercise.exercise_set_list];
+        newExerciseSetList.splice(index, 1);
         
         // 세트 번호 재정렬
-        const updatedHealthSetList = newHealthSetList.map((set, idx) => ({
+        const updatedExerciseSetList = newExerciseSetList.map((set, idx) => ({
             ...set,
-            set_number: idx + 1
+            number: idx + 1
         }));
         
-        setHealth({...health, health_set_list: updatedHealthSetList});
+        setExercise({...exercise, exercise_set_list: updatedExerciseSetList});
         setDeleteConfirm(null); // 삭제 확인 모달 닫기
     };
 
@@ -38,13 +37,13 @@ export default function HealthSetListDiv({health, setHealth}) {
 
     return (
         <div className="w-full max-w-3xl mx-auto">
-            {health.health_set_list.length === 0 && (
+            {exercise.exercise_set_list.length === 0 && (
                 <div className="flex justify-center items-center h-24 text-gray-500 bg-gray-50 dark:bg-gray-700 rounded-lg p-6">
                     세트를 추가해주세요
                 </div>
             )}
             
-            {health.health_set_list.map((healthSet, index) => (
+            {exercise.exercise_set_list.map((exerciseSet, index) => (
                 <div className="bg-gray-50 dark:bg-gray-700 rounded-lg p-6 shadow-sm mb-4 transition-all duration-300" key={index}>
                     {/* 세트 헤더 */}
                     <div className="flex justify-between items-center mb-4 pb-3 border-b border-gray-200 dark:border-gray-600">
@@ -70,7 +69,7 @@ export default function HealthSetListDiv({health, setHealth}) {
                         
                         {/* 삭제 확인 모달 */}
                         {deleteConfirm === index && (
-                            <div className="absolute right-0 top-12 bg-white dark:bg-gray-800 p-4 rounded-lg shadow-lg z-10 border border-gray-200 dark:border-gray-700 w-64">
+                            <div className="right-0 top-12 bg-white dark:bg-gray-800 p-4 rounded-lg shadow-lg z-10 border border-gray-200 dark:border-gray-700 w-64">
                                 <p className="text-sm text-gray-700 dark:text-gray-300 mb-3">
                                     정말 이 세트를 삭제하시겠습니까?
                                 </p>
@@ -94,18 +93,18 @@ export default function HealthSetListDiv({health, setHealth}) {
                     
                     {/* 세트 내용 */}
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        {health.health_type === 'WEIGHT' && (
-                            <HealthSetWeightDiv health={health} healthSet={healthSet} setHealth={setHealth} index={index} />
+                        {exercise.type === 'WEIGHT' && (
+                            <HealthSetWeightDiv exercise={exercise} exerciseSet={exerciseSet} setExercise={setExercise} index={index} />
                         )}
 
-                        {health.health_type === 'CARDIO' && (
-                            <HealthSetCardio health={health} healthSet={healthSet} setHealth={setHealth} index={index} />
+                        {exercise.type === 'CARDIO' && (
+                            <HealthSetCardio exercise={exercise} exerciseSet={exerciseSet} setExercise={setExercise} index={index} />
                         )}
                         
                         <InputField 
                             label="설명"
-                            value={healthSet.description || ""}
-                            onChange={(e) => setHealth({...health, health_set_list: health.health_set_list.map((set, i) => i === index ? {...set, description: e.target.value} : set)})}
+                            value={exerciseSet.description || ""}
+                            onChange={(e) => setExercise({...exercise, exercise_set_list: exercise.exercise_set_list.map((set, i) => i === index ? {...set, description: e.target.value} : set)})}
                             placeholder="세트에 대한 설명을 입력하세요"
                             className="w-full"
                         />

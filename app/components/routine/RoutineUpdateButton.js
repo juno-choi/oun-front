@@ -1,7 +1,7 @@
 import { useRouter } from "next/navigation";
 import axios from "@/app/util/axios";
 
-export default function RoutineUpdateButton({routine, healthList}) {
+export default function RoutineUpdateButton({routine, exerciseList}) {
     const router = useRouter();
     
     const handleClick = async () => {
@@ -17,7 +17,7 @@ export default function RoutineUpdateButton({routine, healthList}) {
                 name: routine.name,
                 description: routine.description || "",
                 days: routine.days,
-                routine_health_list: healthList,
+                routine_exercise_list: exerciseList,
                 status: "ACTIVE"
             };
             

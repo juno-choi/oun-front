@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export default function RoutineHealthNewAddButton({ routineId, healthList, setHealthList }) {
+export default function RoutineExerciseNewAddButton({ routineId, exerciseList, setExerciseList }) {
     
     // 새 운동 추가 함수
     const handleAddExercise = () => {
@@ -13,13 +13,13 @@ export default function RoutineHealthNewAddButton({ routineId, healthList, setHe
             name: "",
             description: "",
             routine_id: routineId,
-            sort: healthList.length + 1,
+            sort: exerciseList.length + 1,
             status: "ACTIVE",
-            health_type: "WEIGHT", // 기본값 설정
+            type: "WEIGHT", // 기본값 설정
         };
         
         // 기존 리스트에 새 운동 추가 (불변성 유지)
-        setHealthList(prevList => [...prevList, newExercise]);
+        setExerciseList(prevList => [...prevList, newExercise]);
     };
 
     return (

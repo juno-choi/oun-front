@@ -1,9 +1,7 @@
 import InputField from "@/app/components/common/InputField";
 import TextAreaField from "@/app/components/common/TextAreaField";
-import axios from "@/app/util/axios";
-import { useEffect } from "react";
 
-export default function RoutineUpdateDiv({routineId, routine, setRoutine}) {
+export default function RoutineUpdateDiv({routine, setRoutine}) {
 
     const handleChange = (e) => {
         const { name, value } = e.target;

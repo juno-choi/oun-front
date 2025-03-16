@@ -9,9 +9,9 @@ import PulseLine from "@/app/components/common/PulseLine";
 import withAuth from "@/app/components/auth/withAuth";
 import StartTimerDiv from "@/app/components/routine/start/StartTimerComponent";
 import StartProcessComponent from "@/app/components/routine/start/StartProcessComponent";
-import StartHealthInfoComponent from "@/app/components/routine/start/StartHealthInfoComponent";
-import StartHealthNevigatorComponent from "@/app/components/routine/start/StartHealthNevigatorComponent";
-import StartHealthListComponent from "@/app/components/routine/start/StartHealthListComponent";
+import StartExerciseInfoComponent from "@/app/components/routine/start/StartExerciseInfoComponent";
+import StartExerciseNevigatorComponent from "@/app/components/routine/start/StartExerciseNevigatorComponent";
+import StartExerciseListComponent from "@/app/components/routine/start/StartExerciseListComponent";
 
 function RoutineStartPage() {
     const router = useRouter();
@@ -21,7 +21,7 @@ function RoutineStartPage() {
     const [currentExerciseIndex, setCurrentExerciseIndex] = useState(0);
     const [currentSetIndex, setCurrentSetIndex] = useState(0);
     const [completedSets, setCompletedSets] = useState({});
-    const [healthList, setHealthList] = useState([]);
+    const [exerciseList, setExerciseList] = useState([]);
     const searchParams = useSearchParams();
     const routineId = searchParams.get('routine_id');
     const [timer, setTimer] = useState(0);
@@ -37,30 +37,30 @@ function RoutineStartPage() {
                 setRoutine(routineResponse.data.data);
                 
                 // 루틴에 포함된 운동 목록 가져오기
-                const healthResponse = await axios.get(`/api/routine/health?routine_id=${routineId}`);
+                const exerciseResponse = await axios.get(`/api/routine/exercise?routine_id=${routineId}`);
                 
                 // 각 운동에 기본 세트 정보 추가
-                const healthListWithSets = healthResponse.data.data.health_list.map(health => {
+                const exerciseListWithSets = exerciseResponse.data.data.exercise_list.map(exercise => {
                     // 세트 정보가 없는 경우 기본 세트 추가
-                    if (!health.health_set_list || health.health_set_list.length === 0) {
+                    if (!exercise.exercise_set_list || exercise.exercise_set_list.length === 0) {
                         return {
-                            ...health,
-                            health_set_list: [
+                            ...exercise,
+                            exercise_set_list: [
                                 { set_number: 1, set_weight: 0, set_count: 0, set_time: 0, set_distance: 0, description: "" }
                             ]
                         };
                     }
-                    return health;
+                    return exercise;
                 });
                 
-                setHealthList(healthListWithSets);
+                setExerciseList(exerciseListWithSets);
                 
                 // 완료된 세트 초기화
                 const initialCompletedSets = {};
-                healthListWithSets.forEach((health, healthIndex) => {
-                    initialCompletedSets[healthIndex] = {};
-                    health.health_set_list.forEach((set, setIndex) => {
-                        initialCompletedSets[healthIndex][setIndex] = false;
+                exerciseListWithSets.forEach((exercise, exerciseIndex) => {
+                    initialCompletedSets[exerciseIndex] = {};
+                    exercise.exercise_set_list.forEach((set, setIndex) => {
+                        initialCompletedSets[exerciseIndex][setIndex] = false;
                     });
                 });
                 setCompletedSets(initialCompletedSets);
@@ -91,11 +91,11 @@ function RoutineStartPage() {
         }));
 
         // 다음 세트로 이동 또는 다음 운동으로 이동
-        if (currentSetIndex < currentExercise.health_set_list.length - 1) {
+        if (currentSetIndex < currentExercise.exercise_set_list.length - 1) {
             // 다음 세트로 이동
             setCurrentSetIndex(currentSetIndex + 1);
             return ;
-        } else if (currentExerciseIndex < healthList.length - 1) {
+        } else if (currentExerciseIndex < exerciseList.length - 1) {
             // 다음 운동으로 이동
             setCurrentExerciseIndex(currentExerciseIndex + 1);
             setCurrentSetIndex(0);
@@ -110,7 +110,7 @@ function RoutineStartPage() {
     };
 
     // 현재 운동 및 세트 정보
-    const currentExercise = healthList[currentExerciseIndex];
+    const currentExercise = exerciseList[currentExerciseIndex];
 
     // 이전 세트로 이동
     const goToPreviousSet = () => {
@@ -118,16 +118,16 @@ function RoutineStartPage() {
             setCurrentSetIndex(currentSetIndex - 1);
         } else if (currentExerciseIndex > 0) {
             setCurrentExerciseIndex(currentExerciseIndex - 1);
-            const prevExercise = healthList[currentExerciseIndex - 1];
-            setCurrentSetIndex(prevExercise.health_set_list.length - 1);
+            const prevExercise = exerciseList[currentExerciseIndex - 1];
+            setCurrentSetIndex(prevExercise.exercise_set_list.length - 1);
         }
     };
 
     // 다음 세트로 이동
     const goToNextSet = () => {
-        if (currentSetIndex < currentExercise.health_set_list.length - 1) {
+        if (currentSetIndex < currentExercise.exercise_set_list.length - 1) {
             setCurrentSetIndex(currentSetIndex + 1);
-        } else if (currentExerciseIndex < healthList.length - 1) {
+        } else if (currentExerciseIndex < exerciseList.length - 1) {
             setCurrentExerciseIndex(currentExerciseIndex + 1);
             setCurrentSetIndex(0);
         }
@@ -141,7 +141,7 @@ function RoutineStartPage() {
         return <ErrorDiv error={error} />;
     }
 
-    if (!routine || healthList.length === 0) {
+    if (!routine || exerciseList.length === 0) {
         return (
             <div className="flex flex-col items-center justify-center min-h-screen p-4">
                 <div className="bg-gray-800 p-8 rounded-xl shadow-md text-center">
@@ -177,16 +177,16 @@ function RoutineStartPage() {
                 <StartTimerDiv timer={timer} setTimer={setTimer} isTimerRunning={isTimerRunning} setIsTimerRunning={setIsTimerRunning} />
 
                 {/* 진행 상태 */}
-                <StartProcessComponent healthList={healthList} completedSets={completedSets} />
+                <StartProcessComponent exerciseList={exerciseList} completedSets={completedSets} />
                 
                 {/* 현재 운동 정보 */}
-                <StartHealthInfoComponent currentExercise={currentExercise} currentSetIndex={currentSetIndex} completedSets={completedSets} currentExerciseIndex={currentExerciseIndex} />
+                <StartExerciseInfoComponent currentExercise={currentExercise} currentSetIndex={currentSetIndex} completedSets={completedSets} currentExerciseIndex={currentExerciseIndex} />
                
                 {/* 네비게이션 버튼 */}
-                <StartHealthNevigatorComponent completeSet={completeSet} goToPreviousSet={goToPreviousSet} goToNextSet={goToNextSet} completedSets={completedSets} currentExerciseIndex={currentExerciseIndex} currentSetIndex={currentSetIndex} />
+                <StartExerciseNevigatorComponent completeSet={completeSet} goToPreviousSet={goToPreviousSet} goToNextSet={goToNextSet} completedSets={completedSets} currentExerciseIndex={currentExerciseIndex} currentSetIndex={currentSetIndex} />
                 
                 {/* 운동 목록 */}
-                <StartHealthListComponent healthList={healthList} completedSets={completedSets} currentExerciseIndex={currentExerciseIndex} setCurrentExerciseIndex={setCurrentExerciseIndex} setCurrentSetIndex={setCurrentSetIndex} />
+                <StartExerciseListComponent exerciseList={exerciseList} completedSets={completedSets} currentExerciseIndex={currentExerciseIndex} setCurrentExerciseIndex={setCurrentExerciseIndex} setCurrentSetIndex={setCurrentSetIndex} />
             </div>
         </div>
     );

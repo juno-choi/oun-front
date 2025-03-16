@@ -1,18 +1,18 @@
 import { useRouter } from "next/navigation";
 
-export default function RoutineStartButton({routineId, healthList}) {
+export default function RoutineStartButton({routineId, exerciseList}) {
     const router = useRouter();
 
     const checkRoutineValidation = () => {
-        if (healthList.length === 0) {
+        if (exerciseList.length === 0) {
             return false;
         }
         return true;
     }
 
     const checkHealthValidation = () => {
-        // 하나라도 health_set_list의 길이가 0인지 확인
-        const hasEmpty = healthList.some(health => health.health_set_list.length === 0);
+        // 하나라도 exercise_set_list의 길이가 0인지 확인
+        const hasEmpty = exerciseList.some(exercise => exercise.exercise_set_list.length === 0);
         
         if (hasEmpty) {
             return false;

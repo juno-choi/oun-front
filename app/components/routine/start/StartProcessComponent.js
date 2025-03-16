@@ -1,19 +1,19 @@
 
-export default function StartProcessComponent({ healthList, completedSets }) {
+export default function StartProcessComponent({ exerciseList, completedSets }) {
 
     // 운동 진행률 계산
     const calculateProgress = () => {
-        if (healthList.length === 0) return 0;
+        if (exerciseList.length === 0) return 0;
         
         let totalSets = 0;
         let completedSetsCount = 0;
         
-        healthList.forEach((health, healthIndex) => {
-            const sets = health.health_set_list.length;
+        exerciseList.forEach((exercise, exerciseIndex) => {
+            const sets = exercise.exercise_set_list.length;
             totalSets += sets;
             
             for (let i = 0; i < sets; i++) {
-                if (completedSets[healthIndex]?.[i]) {
+                if (completedSets[exerciseIndex]?.[i]) {
                     completedSetsCount++;
                 }
             }

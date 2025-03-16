@@ -1,37 +1,37 @@
 import InputField from "@/app/components/common/InputField";
 import TextAreaField from "@/app/components/common/TextAreaField";
 
-export default function HealthUpdateSubject({health, setHealth}) {
+export default function ExerciseUpdateSubject({exercise, setExercise}) {
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setHealth(prev => ({
+        setExercise(prev => ({
             ...prev,
             [name]: value
         }));
     };
 
-    const healthTypeConvert = {
+    const exerciseTypeConvert = {
         "WEIGHT": "웨이트(맨몸)",
         "CARDIO": "유산소",
     }
 
     return (
         <div className="w-full">
-            {health && (
+            {exercise && (
                 <div className="bg-gray-50 dark:bg-gray-700 rounded-lg p-6 shadow-sm">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <InputField
                             label="운동 이름"
                             name="name"
-                            value={health.name || ""}
+                            value={exercise.name || ""}
                             onChange={handleChange}
                             placeholder="ex) 스쿼트"
                             required
                         />
                         <InputField
                             label="운동 타입"
-                            name="health_type"
-                            value={healthTypeConvert[health.health_type] || ""}
+                            name="type"
+                            value={exerciseTypeConvert[exercise.type] || ""}
                             onChange={handleChange}
                             placeholder="ex) 하체 운동"
                             disabled={true}
@@ -41,7 +41,7 @@ export default function HealthUpdateSubject({health, setHealth}) {
                         <TextAreaField
                             label="운동 설명"
                             name="description"
-                            value={health.description || ""}
+                            value={exercise.description || ""}
                             onChange={handleChange}
                             placeholder="ex) 하체 운동"
                             required

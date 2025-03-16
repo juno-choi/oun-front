@@ -18,7 +18,6 @@ export default function RoutineCreateButton({ routineData }) {
             alert('루틴 생성에 실패했습니다. 다시 시도해주세요.');
         }
 
-      // 성공 시 health 페이지로 이동
       router.push(`/routine`);
     } catch (error) {
       console.error("루틴 생성 실패:", error);

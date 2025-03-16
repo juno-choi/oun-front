@@ -5,22 +5,22 @@ import TextAreaField from "@/app/components/common/TextAreaField";
 import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
 import RoutineSelect from "../RoutineSelect";
 
-export default function RoutineHealthUpdateDiv({routineId, healthList, setHealthList}) {
+export default function RoutineExerciseUpdateDiv({routineId, exerciseList, setExerciseList}) {
 
     useEffect(() => {
-        const fetchHealthList = async () => {
+        const fetchExerciseList = async () => {
             try {
-                const response = await axios.get(`/api/routine/health?routine_id=${routineId}`);
-                const updatedHealthList = response.data.data.health_list.map(health => ({
-                    ...health,
-                    id: health.id || `health-${health.sort}`
+                const response = await axios.get(`/api/routine/exercise?routine_id=${routineId}`);
+                const updatedExerciseList = response.data.data.exercise_list.map(exercise => ({
+                    ...exercise,
+                    id: exercise.id || `exercise-${exercise.sort}`
                 }));
-                setHealthList(updatedHealthList);
+                setExerciseList(updatedExerciseList);
             } catch (error) {
                 console.error("운동 목록 조회 실패:", error);
             }
         };
-        fetchHealthList();
+        fetchExerciseList();
     }, [routineId]);
 
     // 드래그 앤 드롭 종료 후 실행되는 함수
@@ -31,7 +31,7 @@ export default function RoutineHealthUpdateDiv({routineId, healthList, setHealth
         }
 
         // 항목 순서 재정렬
-        const items = Array.from(healthList);
+        const items = Array.from(exerciseList);
         const [reorderedItem] = items.splice(result.source.index, 1);
         items.splice(result.destination.index, 0, reorderedItem);
 
@@ -42,19 +42,19 @@ export default function RoutineHealthUpdateDiv({routineId, healthList, setHealth
         }));
 
         // 상태 업데이트
-        setHealthList(updatedItems);
+        setExerciseList(updatedItems);
     };
 
     // 입력 필드 변경 핸들러
     const handleInputChange = (id, field, value) => {
-        setHealthList(prev => 
+        setExerciseList(prev => 
             prev.map(item => 
                 item.id === id ? { ...item, [field]: value } : item
             )
         );
     };
 
-    const healthTypeOptions = [
+    const exerciseTypeOptions = [
         { value: 'WEIGHT', label: '웨이트(맨몸)' },
         { value: 'CARDIO', label: '유산소' },
     ];
@@ -62,8 +62,8 @@ export default function RoutineHealthUpdateDiv({routineId, healthList, setHealth
     // 운동 삭제 핸들러
     const [deleteConfirm, setDeleteConfirm] = useState(null);
 
-    const handleDeleteHealth = (id) => {
-        setHealthList(prev => prev.filter(item => item.id !== id));
+    const handleDeleteExercise = (id) => {
+        setExerciseList(prev => prev.filter(item => item.id !== id));
         setDeleteConfirm(null);
     };
 
@@ -77,23 +77,23 @@ export default function RoutineHealthUpdateDiv({routineId, healthList, setHealth
 
     return (
         <div className="w-full">
-            {healthList.length === 0 ? (
+            {exerciseList.length === 0 ? (
                 <div className="flex justify-center items-center h-24 text-gray-500">
                     운동을 추가해주세요
                 </div>
             ) : (
                 <DragDropContext onDragEnd={onDragEnd}>
-                    <Droppable droppableId="health-list">
+                    <Droppable droppableId="exercise-list">
                         {(provided, snapshot) => (
                             <div
                                 {...provided.droppableProps}
                                 ref={provided.innerRef}
                                 className={`space-y-4 ${snapshot.isDraggingOver ? "bg-gray-100 dark:bg-gray-700 rounded-lg p-2" : ""}`}
                             >
-                                {healthList.map((health, index) => (
+                                {exerciseList.map((exercise, index) => (
                                     <Draggable 
-                                        key={health.id || `health-${index}`} 
-                                        draggableId={String(health.id || `health-${index}`)} 
+                                        key={exercise.id || `exercise-${index}`} 
+                                        draggableId={String(exercise.id || `exercise-${index}`)} 
                                         index={index}
                                     >
                                         {(provided, snapshot) => (
@@ -118,12 +118,12 @@ export default function RoutineHealthUpdateDiv({routineId, healthList, setHealth
                                                     <div className="pl-10">
                                                         <div className="flex justify-between items-center mb-4 pb-2 border-b border-gray-200 dark:border-gray-700">
                                                             <h3 className="text-lg font-semibold text-black dark:text-white">
-                                                                {health.name || `운동 ${index + 1}`}
+                                                                {exercise.name || `운동 ${index + 1}`}
                                                             </h3>
                                                             
                                                             {/* 삭제 버튼 */}
                                                             <button 
-                                                                onClick={() => showDeleteConfirm(health.id)}
+                                                                onClick={() => showDeleteConfirm(exercise.id)}
                                                                 className="text-gray-500 hover:text-red-500 transition-colors duration-200 p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-600"
                                                                 aria-label="운동 삭제"
                                                             >
@@ -135,7 +135,7 @@ export default function RoutineHealthUpdateDiv({routineId, healthList, setHealth
                                                             </button>
                                                             
                                                             {/* 삭제 확인 모달 */}
-                                                            {deleteConfirm === health.id && (
+                                                            {deleteConfirm === exercise.id && (
                                                                 <div className="absolute right-0 top-12 bg-white dark:bg-gray-800 p-4 rounded-lg shadow-lg z-10 border border-gray-200 dark:border-gray-700 w-64">
                                                                     <p className="text-sm text-gray-700 dark:text-gray-300 mb-3">
                                                                         정말 이 운동을 삭제하시겠습니까?
@@ -148,7 +148,7 @@ export default function RoutineHealthUpdateDiv({routineId, healthList, setHealth
                                                                             취소
                                                                         </button>
                                                                         <button 
-                                                                            onClick={() => handleDeleteHealth(health.id)}
+                                                                            onClick={() => handleDeleteExercise(exercise.id)}
                                                                             className="px-3 py-1 text-sm bg-red-500 text-white rounded hover:bg-red-600 transition-colors"
                                                                         >
                                                                             삭제
@@ -162,27 +162,27 @@ export default function RoutineHealthUpdateDiv({routineId, healthList, setHealth
                                                             <InputField
                                                                 label="운동 이름"
                                                                 name="name"
-                                                                value={health.name || ""}
-                                                                onChange={(e) => handleInputChange(health.id, 'name', e.target.value)}
+                                                                value={exercise.name || ""}
+                                                                onChange={(e) => handleInputChange(exercise.id, 'name', e.target.value)}
                                                                 placeholder="ex) 스쿼트"
                                                                 required
                                                             />  
                                                             <RoutineSelect 
                                                                 label="운동 타입"
-                                                                name="health_type"
-                                                                value={health.health_type || ""}
-                                                                onChange={(e) => handleInputChange(health.id, 'health_type', e.target.value)}
-                                                                options={healthTypeOptions}
+                                                                name="type"
+                                                                value={exercise.type || ""}
+                                                                onChange={(e) => handleInputChange(exercise.id, 'type', e.target.value)}
+                                                                options={exerciseTypeOptions}
                                                                 required
-                                                                disabled={health.health_id > 0}
+                                                                disabled={exercise.exercise_id > 0}
                                                             />
                                                         </div>
                                                         <div className="mt-4">
                                                             <TextAreaField
                                                                 label="운동 설명"
                                                                 name="description"
-                                                                value={health.description || ""}
-                                                                onChange={(e) => handleInputChange(health.id, 'description', e.target.value)}
+                                                                value={exercise.description || ""}
+                                                                onChange={(e) => handleInputChange(exercise.id, 'description', e.target.value)}
                                                                 placeholder="ex) 하체 운동"
                                                             />
                                                         </div>

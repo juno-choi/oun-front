@@ -1,21 +1,16 @@
 import { useRouter } from "next/navigation";
 import axios from "@/app/util/axios";
-import { useEffect } from "react";
 
-export default function HealthCreateButton({ healthData }) {
+export default function ExerciseCreateButton({ exerciseData }) {
     const router = useRouter();
-
-    useEffect(() => {
-        console.log(healthData);
-    }, [healthData]);
 
     const handleClick = async (e) => {
         e.preventDefault();
         
-        const routineId = healthData.routine_id;
+        const routineId = exerciseData.routine_id;
         try {
-            const response = await axios.post("/api/routine/health", 
-                healthData
+            const response = await axios.post("/api/routine/exercise", 
+                exerciseData
             );
 
             const code = response.data.code;
