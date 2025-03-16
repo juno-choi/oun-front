@@ -136,23 +136,28 @@ export default function RoutineExerciseUpdateDiv({routineId, exerciseList, setEx
                                                             
                                                             {/* 삭제 확인 모달 */}
                                                             {deleteConfirm === exercise.id && (
-                                                                <div className="absolute right-0 top-12 bg-white dark:bg-gray-800 p-4 rounded-lg shadow-lg z-10 border border-gray-200 dark:border-gray-700 w-64">
-                                                                    <p className="text-sm text-gray-700 dark:text-gray-300 mb-3">
-                                                                        정말 이 운동을 삭제하시겠습니까?
-                                                                    </p>
-                                                                    <div className="flex justify-end space-x-2">
-                                                                        <button 
-                                                                            onClick={cancelDelete}
-                                                                            className="px-3 py-1 text-sm bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors"
-                                                                        >
-                                                                            취소
-                                                                        </button>
-                                                                        <button 
-                                                                            onClick={() => handleDeleteExercise(exercise.id)}
-                                                                            className="px-3 py-1 text-sm bg-red-500 text-white rounded hover:bg-red-600 transition-colors"
-                                                                        >
-                                                                            삭제
-                                                                        </button>
+                                                                <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center" onClick={cancelDelete}>
+                                                                    <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg max-w-sm w-full mx-4" onClick={(e) => e.stopPropagation()}>
+                                                                        <p className="text-lg font-semibold mb-4 text-gray-700 dark:text-gray-300">
+                                                                            운동 삭제 확인
+                                                                        </p>
+                                                                        <p className="text-sm text-gray-600 dark:text-gray-400 mb-6">
+                                                                            정말 이 운동을 삭제하시겠습니까?
+                                                                        </p>
+                                                                        <div className="flex justify-end space-x-3">
+                                                                            <button 
+                                                                                onClick={cancelDelete}
+                                                                                className="px-4 py-2 text-sm bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors"
+                                                                            >
+                                                                                취소
+                                                                            </button>
+                                                                            <button 
+                                                                                onClick={() => handleDeleteExercise(exercise.id)}
+                                                                                className="px-4 py-2 text-sm bg-red-500 text-white rounded hover:bg-red-600 transition-colors"
+                                                                            >
+                                                                                삭제
+                                                                            </button>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             )}
