@@ -31,8 +31,8 @@ export default function GoogleAuthCallback() {
       const refreshTokenMaxAge = Math.floor(Math.max((refreshTokenExpiry - currentTime) / 1000, 0));
 
       // 쿠키에 토큰 저장
-      document.cookie = `access_token=${accessToken}; max-age=${accessTokenMaxAge}; path=/; Secure; SameSite=Lax; domain=simol.iptime.org:3000`;
-      document.cookie = `refresh_token=${refreshToken}; max-age=${refreshTokenMaxAge}; path=/; Secure; SameSite=Lax; domain=simol.iptime.org:3000`;
+      document.cookie = `access_token=${accessToken}; max-age=${accessTokenMaxAge}; path=/; Secure; SameSite=Lax;`;
+      document.cookie = `refresh_token=${refreshToken}; max-age=${refreshTokenMaxAge}; path=/; Secure; SameSite=Lax;`;
   
       window.location.href = "/";
     };

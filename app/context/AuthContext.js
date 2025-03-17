@@ -39,8 +39,8 @@ export function AuthProvider({ children }) {
   };
 
   const logout = () => {
-    document.cookie = "access_token=; max-age=0; path=/; domain=simol.iptime.org";
-    document.cookie = "refresh_token=; max-age=0; path=/; domain=simol.iptime.org";
+    document.cookie = "access_token=; max-age=0; path=/;";
+    document.cookie = "refresh_token=; max-age=0; path=/;";
     setIsLoggedIn(false);
     router.push('/');
   };
