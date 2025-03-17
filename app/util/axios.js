@@ -44,8 +44,8 @@ api.interceptors.request.use(async (config) => {
         accessToken = newAccessToken;
         refreshToken = newRefreshToken;
         // cookie에 저장
-        document.cookie = `access_token=${newAccessToken}; max-age=${newAccessTokenExpiry}; path=/; Secure; SameSite=Lax; domain=simol.iptime.org`;
-        document.cookie = `refresh_token=${newRefreshToken}; max-age=${newRefreshTokenExpiry}; path=/; Secure; SameSite=Lax; domain=simol.iptime.org`;
+        document.cookie = `access_token=${newAccessToken}; max-age=${newAccessTokenExpiry}; path=/; Secure; SameSite=Lax; domain=simol.iptime.org:3000`;
+        document.cookie = `refresh_token=${newRefreshToken}; max-age=${newRefreshTokenExpiry}; path=/; Secure; SameSite=Lax; domain=simol.iptime.org:3000`;
     }
 
     // access_token이 있으면 헤더에 추가
@@ -91,8 +91,8 @@ api.interceptors.response.use((response) => {
             const refreshTokenMaxAge = Math.floor(Math.max((refreshTokenExpiry - currentTime) / 1000, 0));
     
             // 쿠키에 토큰 저장
-            document.cookie = `access_token=${accessToken}; max-age=${accessTokenMaxAge}; path=/; Secure; SameSite=Lax; domain=simol.iptime.org`;
-            document.cookie = `refresh_token=${refreshToken}; max-age=${refreshTokenMaxAge}; path=/; Secure; SameSite=Lax; domain=simol.iptime.org`;
+            document.cookie = `access_token=${accessToken}; max-age=${accessTokenMaxAge}; path=/; Secure; SameSite=Lax; domain=simol.iptime.org:3000`;
+            document.cookie = `refresh_token=${refreshToken}; max-age=${refreshTokenMaxAge}; path=/; Secure; SameSite=Lax; domain=simol.iptime.org:3000`;
 
             originalRequest.headers.Authorization = `Bearer ${accessToken}`;
             return api(originalRequest);
