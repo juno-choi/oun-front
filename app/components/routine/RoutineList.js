@@ -170,15 +170,6 @@ export default function RoutineList() {
     return <div className="text-center">로딩 중...</div>;
   }
 
-  // 모든 요일에 루틴이 없는지 확인
-  const hasNoRoutines = ORDERED_DAYS.every(day => 
-    !routinesByDay[day] || routinesByDay[day].length === 0
-  );
-
-  if (hasNoRoutines) {
-    return <div className="text-center">루틴이 없습니다.</div>;
-  }
-
   // 현재 선택된 요일
   const selectedDay = availableDays[currentDayIndex];
   
