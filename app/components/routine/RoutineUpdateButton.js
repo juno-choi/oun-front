@@ -6,8 +6,8 @@ export default function RoutineUpdateButton({routine, exerciseList}) {
     
     const handleClick = async () => {
         // 유효성 검사
-        if (!routine.name || !routine.days) {
-            alert("루틴 이름과 요일은 필수 입력 항목입니다.");
+        if (!routine.name) {
+            alert("루틴 이름은 필수 입력 항목입니다.");
             return;
         }
         
@@ -16,7 +16,6 @@ export default function RoutineUpdateButton({routine, exerciseList}) {
                 routine_id: routine.routine_id,
                 name: routine.name,
                 description: routine.description || "",
-                days: routine.days,
                 routine_exercise_list: exerciseList,
                 status: "ACTIVE"
             };

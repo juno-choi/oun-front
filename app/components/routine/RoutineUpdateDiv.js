@@ -11,35 +11,9 @@ export default function RoutineUpdateDiv({routine, setRoutine}) {
         }));
     };
 
-    const daysMap = {
-        MONDAY: '월',
-        TUESDAY: '화',
-        WEDNESDAY: '수',
-        THURSDAY: '목',
-        FRIDAY: '금',
-        SATURDAY: '토',
-        SUNDAY: '일'
-    };
-    
-    const getDayValue = () => {
-        if (!routine || !routine.days || !daysMap[routine.days]) {
-            return "";
-        }
-        return daysMap[routine.days];
-    };
-    
     return (
         <div className="w-full">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <InputField
-                    label="루틴 요일"
-                    name="days"
-                    value={getDayValue()}
-                    onChange={handleChange}
-                    required
-                    disabled={true}
-                />
-                
+            <div className="gap-6">
                 <InputField
                     label="루틴 이름"
                     name="name"
