@@ -18,7 +18,6 @@ function RoutineUpdatePage() {
     const [routine, setRoutine] = useState({
         name: '',
         description: '',
-        days: ''
     });
     const [exerciseList, setExerciseList] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
@@ -45,20 +44,6 @@ function RoutineUpdatePage() {
         }
     }, [routineId]);
 
-    // 요일 변환 함수
-    const getDayName = (day) => {
-        const daysMap = {
-            MONDAY: '월요일',
-            TUESDAY: '화요일',
-            WEDNESDAY: '수요일',
-            THURSDAY: '목요일',
-            FRIDAY: '금요일',
-            SATURDAY: '토요일',
-            SUNDAY: '일요일'
-        };
-        return daysMap[day] || '';
-    };
-
     return (
         <div className="flex flex-col items-center justify-center min-h-screen p-4">
             {isLoading ? (
@@ -76,9 +61,6 @@ function RoutineUpdatePage() {
                     <div className="mt-8">
                         <div className="flex items-center justify-between mb-4">
                             <h2 className="text-xl font-semibold text-black dark:text-white">기본 정보</h2>
-                            <div className="text-sm text-gray-500">
-                                {routine.days ? getDayName(routine.days) : '요일 미지정'}
-                            </div>
                         </div>
                         <div className="bg-gray-50 dark:bg-gray-700 rounded-lg p-6 shadow-sm">
                             <RoutineUpdateDiv routine={routine} setRoutine={setRoutine} />
