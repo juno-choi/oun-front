@@ -6,7 +6,7 @@ export default function ExerciseUpdateButton({routine_id, exercise, setExercise}
     const updateExercise = async () => {
         setExercise({...exercise});
         try {
-            const response = await axios.put(`/api/routine/exercise`, exercise);
+            const response = await axios.put(`/api/oun/routine/exercise`, exercise);
             router.push(`/routine/detail?routine_id=${routine_id}`);
         } catch (error) {
             alert(error.response.data.errors[0].detail);

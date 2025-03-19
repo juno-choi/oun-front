@@ -33,11 +33,11 @@ function RoutineStartPage() {
             setIsLoading(true);
             try {
                 // 루틴 기본 정보 가져오기
-                const routineResponse = await axios.get(`/api/routine/${routineId}`);
+                const routineResponse = await axios.get(`/api/oun/routine/${routineId}`);
                 setRoutine(routineResponse.data.data);
                 
                 // 루틴에 포함된 운동 목록 가져오기
-                const exerciseResponse = await axios.get(`/api/routine/exercise?routine_id=${routineId}`);
+                const exerciseResponse = await axios.get(`/api/oun/routine/exercise?routine_id=${routineId}`);
                 
                 // 각 운동에 기본 세트 정보 추가
                 const exerciseListWithSets = exerciseResponse.data.data.exercise_list.map(exercise => {

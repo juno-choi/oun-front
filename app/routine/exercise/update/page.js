@@ -26,7 +26,7 @@ function ExerciseUpdatePage() {
 
     const getExercise = async () => {
         try {
-            const response = await axios.get(`/api/routine/exercise/${exerciseId}`);
+            const response = await axios.get(`/api/oun/routine/exercise/${exerciseId}`);
             setExercise(response.data.data);
         } catch (error) {
             setError(error);

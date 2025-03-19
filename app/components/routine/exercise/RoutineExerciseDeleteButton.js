@@ -10,7 +10,7 @@ export default function RoutineExerciseDeleteButton({routineExerciseId, fetchExe
         }
         
         try {
-            const response = await axios.delete(`/api/routine/exercise/${routineExerciseId}`);
+            const response = await axios.delete(`/api/oun/routine/exercise/${routineExerciseId}`);
             // 삭제 후 목록 다시 불러오기
             fetchExerciseList();
         } catch (error) {

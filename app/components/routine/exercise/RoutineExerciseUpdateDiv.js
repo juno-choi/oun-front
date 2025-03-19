@@ -10,7 +10,7 @@ export default function RoutineExerciseUpdateDiv({routineId, exerciseList, setEx
     useEffect(() => {
         const fetchExerciseList = async () => {
             try {
-                const response = await axios.get(`/api/routine/exercise?routine_id=${routineId}`);
+                const response = await axios.get(`/api/oun/routine/exercise?routine_id=${routineId}`);
                 const updatedExerciseList = response.data.data.exercise_list.map(exercise => ({
                     ...exercise,
                     id: exercise.id || `exercise-${exercise.sort}`

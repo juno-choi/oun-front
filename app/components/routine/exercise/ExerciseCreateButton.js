@@ -9,7 +9,7 @@ export default function ExerciseCreateButton({ exerciseData }) {
         
         const routineId = exerciseData.routine_id;
         try {
-            const response = await axios.post("/api/routine/exercise", 
+            const response = await axios.post("/api/oun/routine/exercise", 
                 exerciseData
             );
 

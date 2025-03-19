@@ -28,7 +28,7 @@ function RoutineUpdatePage() {
         const fetchRoutineData = async () => {
             setIsLoading(true);
             try {
-                const response = await axios.get(`/api/routine/${routineId}`);
+                const response = await axios.get(`/api/oun/routine/${routineId}`);
                 setRoutine(response.data.data);
                 setError(null);
             } catch (err) {

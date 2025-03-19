@@ -13,7 +13,7 @@ export default function RoutineExerciseList({routineId, exerciseList, setExercis
     const router = useRouter();
     const fetchExerciseList = async () => {
         try {
-            const response = await axios.get(`/api/routine/exercise?routine_id=${routineId}`);
+            const response = await axios.get(`/api/oun/routine/exercise?routine_id=${routineId}`);
             setExerciseList(response.data.data.exercise_list);
         } catch (error) {
             setError(error);

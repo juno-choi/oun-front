@@ -18,7 +18,7 @@ export default function RoutineList() {
   const fetchRoutineList = async () => {
     setIsLoading(true);
     try {
-      const response = await axios.get("/api/routine");
+      const response = await axios.get("/api/oun/routine");
       const routineList = response.data.data.routine_list;
       setRoutineList(routineList);
 

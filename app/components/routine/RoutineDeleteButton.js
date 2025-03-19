@@ -11,7 +11,7 @@ export default function RoutineDeleteButton({ routineId, fetchRoutineList }) {
     }
     
     try {
-      await axios.delete(`/api/routine/${routineId}`);
+      await axios.delete(`/api/oun/routine/${routineId}`);
       // 삭제 후 목록 다시 불러오기
       fetchRoutineList();
     } catch (error) {

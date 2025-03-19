@@ -9,7 +9,7 @@ export default function RoutineCreateButton({ routineData }) {
     e.preventDefault();
     try {
         // response로 받은 routine id값 넘겨야함.
-        const response = await axios.post("/api/routine", routineData);
+        const response = await axios.post("/api/oun/routine", routineData);
         
         const code = response.data.code;
         if (code === '0001') {

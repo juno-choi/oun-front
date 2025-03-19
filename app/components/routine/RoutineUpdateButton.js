@@ -20,7 +20,7 @@ export default function RoutineUpdateButton({routine, exerciseList}) {
                 status: "ACTIVE"
             };
             
-            const response = await axios.put(`/api/routine`, requestData);
+            const response = await axios.put(`/api/oun/routine`, requestData);
             if (response.data.code === '0000') {
                 alert("루틴이 성공적으로 수정되었습니다.");
                 router.push(`/routine/detail?routine_id=${routine.routine_id}`);

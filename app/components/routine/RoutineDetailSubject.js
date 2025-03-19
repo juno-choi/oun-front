@@ -12,7 +12,7 @@ export default function RoutineDetailSubject({routineId, routine, setRoutine}) {
     useEffect(() => {
         const fetchRoutine = async () => {
             try {
-                const response = await axios.get(`/api/routine/${routineId}`);
+                const response = await axios.get(`/api/oun/routine/${routineId}`);
                 setRoutine(response.data.data);
             } catch (error) {
                 setError(error);
